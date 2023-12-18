@@ -9,9 +9,9 @@ const Header = () => {
 
                 <nav className="w-[60%] flex items-center justify-between">
                     <div className="text-dark text-[16px] font-semibold  flex items-center justify-between gap-10">
-                        <a href="">Home</a>
-                        <a href="">AboutUs</a>
-                        <a href="">ContactUs</a>
+                        <a href="" className="hover:text-blue transition-colors delay-200">Home</a>
+                        <a href="" className="hover:text-blue transition-colors delay-200">AboutUs</a>
+                        <a href="" className="hover:text-blue transition-colors delay-200">ContactUs</a>
                     </div>
 
                     <button className="text-[16px] px-5 py-2 bg-blue text-white font-semibold  rounded-md">Get Started</button>
