@@ -21,7 +21,7 @@ that makes all the <span className="text-blue"> difference.</span></h1>
                 </section>
 
                 <section>
-                    <Image src="/img/homehero.png" width={600} height={600} alt="hero-img" />
+                    <Image src="/img/homehero.png" width={600} height={600} alt="hero-img" loading="lazy"/>
                 </section>
             </section>
         </main>

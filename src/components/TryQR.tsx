@@ -17,7 +17,7 @@ const TryQR = () => {
                 </section>
 
                 <section>
-                    <Image src="/img/qr-go.png" width={250} height={250} alt="hero-img" />
+                    <Image src="/img/qr-go.png" width={250} height={250} alt="hero-img" loading="lazy"/>
                 </section>
             </section>
         </main>

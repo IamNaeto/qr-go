@@ -23,7 +23,7 @@ const LandingHero = () => {
                 </section>
 
                 <section>
-                    <Image src="/img/landing-img.png" width={580} height={580} alt="hero-img" />
+                    <Image src="/img/landing-img.png" width={580} height={580} alt="hero-img"  loading="lazy"/>
                 </section>
             </section>
 

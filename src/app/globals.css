@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* *{
+  border: 2px solid red;
+} */
 
 .bg-background {
     background-image: url('/img/bg-img.png');

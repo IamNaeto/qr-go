@@ -6,7 +6,7 @@ const QRGuildlines = () => {
 
             <section className="grid grid-cols-3 gap-8 mb-20">
                 <div className="flex flex-col items-center justify-center text-center gap-2">
-                    <Image src="/img/content.png" width={150} height={150} alt="content"/>
+                    <Image src="/img/content.png" width={150} height={150} alt="content" loading="lazy"/>
                     
                     <h1 className="text-[22px] text-dark font-semibold max-w-[60%]">Choose the content of your Qr Code.</h1>
 
@@ -14,7 +14,7 @@ const QRGuildlines = () => {
                 </div>
 
                 <div className="flex flex-col items-center justify-center text-center gap-2">
-                    <Image src="/img/design.png" width={150} height={150} alt="content"/>
+                    <Image src="/img/design.png" width={150} height={150} alt="content" loading="lazy"/>
                     
                     <h1 className="text-[22px] text-dark font-semibold max-w-[60%]">Customize and design</h1>
 
@@ -22,7 +22,7 @@ const QRGuildlines = () => {
                 </div>
 
                 <div className="flex flex-col items-center justify-center text-center gap-2">
-                    <Image src="/img/download.png" width={150} height={150} alt="content"/>
+                    <Image src="/img/download.png" width={150} height={150} alt="content" loading="lazy"/>
                     
                     <h1 className="text-[22px] text-dark font-semibold max-w-[70%]">Download your QR code.</h1>
 
