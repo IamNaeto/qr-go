@@ -12,6 +12,7 @@ const config: Config = {
         dark: '#1D242C',
         blue: '#0176C3',
         skyblue: '#CCE4F3',
+        liteskyblue: 'rgba(204, 228, 243, 0.2)',
         darkblue: '#014F82',
         offwhite: '#FDFDFD',
       },

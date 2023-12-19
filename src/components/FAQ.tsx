@@ -10,7 +10,7 @@ const FAQ = () => {
                 </div>
             </section>
 
-            <section className="relative top-[50px] px-[5%] grid gap-8 py-20">
+            <section className="relative top-[50px] px-[5%] grid gap-8 py-20 mb-[100px]">
                 <div className="grid grid-cols-2 items-center justify-center place-items-center">
                     <div>
                         <Image src="/img/faq1.png" width={300} height={300} alt="hero-img" loading="lazy"/>

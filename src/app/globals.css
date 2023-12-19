@@ -28,3 +28,10 @@
     background-attachment: fixed;
   }
   
+.input{
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 2px solid rgba(2, 2, 2, 0.3);
+  width: 100%;
+}

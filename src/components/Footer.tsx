@@ -6,7 +6,7 @@ import { FaFacebookF, FaXTwitter, FaYoutube } from "react-icons/fa6";
 const Footer = () => {
     const pathName = usePathname()
     return ( 
-        <main className="bg-darkblue px-[5%] py-10 relative top-[150px] grid gap-8">
+        <main className="bg-darkblue px-[5%] py-10 relative top-[50px] grid gap-8">
             <section className="grid grid-cols-3 items-center justify-center">
                 <Link href="/">
                     <Image src="/img/footer-logo.png" width={50} height={50} alt="footer-img"/>
