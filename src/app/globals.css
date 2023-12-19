@@ -6,6 +6,20 @@
   border: 2px solid red;
 } */
 
+/* custom scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1D242C;
+  box-shadow: 1px 1px 5px #FDFDFD;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #014F82;
+}
+
 .bg-background {
     background-image: url('/img/bg-img.png');
     background-position: bottom;
