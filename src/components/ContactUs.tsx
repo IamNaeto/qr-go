@@ -1,11 +1,9 @@
-import Image from "next/image";
+import SideView from "./SideView";
 
 const ContactUs = () => {
     return ( 
         <main className="relative top-[50px] grid grid-cols-2 items-center justify-center">
-            <section className="bg-liteskyblue flex items-center justify-center py-20 h-full">
-                <Image src="/img/contactus.png" width={400} height={400} alt="aboutus-img" loading="lazy"/>
-            </section>
+            <SideView />
 
             <section className="py-20 px-[10%]">
                 <div className="flex flex-col items-center justify-center">
@@ -14,7 +12,7 @@ const ContactUs = () => {
                         and we’ll respond as soon as possible</p>
                 </div>
 
-                <form action="" className="grid gap-4">
+                <form action="" className="grid gap-4 text-[16px] text-dark">
                     <label htmlFor="">Name 
                         <input type="text" placeholder="Enter full name"className="input"/>
                     </label>

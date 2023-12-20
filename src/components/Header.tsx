@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import GetStartedBtn from "./GetStartedBtn";
 const Header = () => {
     const pathName = usePathname()
     return ( 
@@ -18,7 +19,7 @@ const Header = () => {
                         <Link href="contact" className={pathName === "/contact" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>ContactUs</Link>
                     </div>
 
-                    <button className="text-[16px] px-5 py-2 bg-blue text-white font-semibold  rounded-md">Get Started</button>
+                    <GetStartedBtn />
                 </nav>
             </header>
 

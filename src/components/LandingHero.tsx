@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import GetStartedBtn from "./GetStartedBtn";
 
 const LandingHero = () => {
     return (
@@ -17,7 +18,7 @@ const LandingHero = () => {
                         through detailed statistics.</p>
 
                     <div className="flex items-center gap-4">
-                        <button className="text-[16px] px-5 py-2 bg-blue text-white font-semibold rounded-md">Get Started</button>
+                        <GetStartedBtn />
                         <Link href="/home" className="text-[16px] px-5 py-2 bg-white text-blue border-2 border-blue font-semibold rounded-md">Learn More</Link>
                     </div>
                 </section>
