@@ -36,3 +36,10 @@
   width: 100%;
   margin-top: 0.5rem;
 }
+
+.profile-input{
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+}
