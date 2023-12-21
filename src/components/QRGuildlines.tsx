@@ -1,7 +1,7 @@
 import Image from "next/image";
 const QRGuildlines = () => {
     return ( 
-        <main className="relative top-[100px] bg-skyblue w-full px-[5%] py-20 grid gap-4 bg-background">
+        <main className="relative top-[100px] bg-skyblue w-full px-[5%] pt-28 pb-20 grid gap-4 bg-background" id="guildlines">
             <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center">Create your Qr Code in matter of minutes.</h1>
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">

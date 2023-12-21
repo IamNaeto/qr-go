@@ -5,7 +5,7 @@ const FAQ = () => {
         <main className="relative top-[100px] w-full">
             <hr className="bg-darkblue h-3 w-full mb-2" />
             <section className=" relative w-full h-[150px] bg-darkblue flex items-center justify-center">
-                <div className="bg-white p-5 md:p-10 shadow-xl absolute bottom-[-50px]">
+                <div className="bg-white p-3 xs:p-5 md:p-10 shadow-xl absolute bottom-[-50px]">
                     <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-center font-semibold text-dark">Frequently Asked Questions</h1>
                 </div>
             </section>
@@ -35,7 +35,7 @@ const FAQ = () => {
                             for easy access.</p>
                     </div>
 
-                    <div className="mt-5 md:mt-0 md:order-second order-first">
+                    <div className="mb-5 md:mb-0 md:order-second order-first">
                         <Image src="/img/faq2.png" width={300} height={300} alt="hero-img" loading="lazy"/>
                     </div>
                 </div>

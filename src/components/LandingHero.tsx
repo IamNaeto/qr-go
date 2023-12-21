@@ -5,7 +5,7 @@ import GetStartedBtn from "./GetStartedBtn";
 
 const LandingHero = () => {
     return (
-        <main className="w-full px-[5%] relative top-[80px] py-10">
+        <main className="w-full px-[5%] relative top-[80px] py-7">
             <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center justify-center place-items-center">
                 <section className="grid gap-4">
                     <h1 className="w-full lg:w-[80%] text-[28px] md:text-[36px] lg:text-[40px] xl:text-[42px] text-dark font-semibold text-center md:text-left"><span className="text-blue">Create a QR code</span> to
