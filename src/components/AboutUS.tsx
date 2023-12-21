@@ -4,9 +4,9 @@ const AboutUs = () => {
     return ( 
         <main className="relative top-[100px] md:top-[60px] grid grid-cols-1 md:grid-cols-2 items-center justify-center">
 
-            <div className="block md:hidden px-[5%] mb-5">
+            <div className="md:hidden px-[5%] mb-5 flex flex-col items-center justify-center">
                 <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center">About Us</h1>
-                <p className="text-[14px] text-dark text-center">Get to know more about QR-Go, what it does, how it does it and other interesting information about QR-Go</p>
+                <p className="text-[14px] md:text-[16px] text-dark text-center max-w-[70%]">Get to know more about QR-Go, what it does, how it does it and other interesting information about QR-Go</p>
             </div>
 
             <section className="bg-liteskyblue flex items-center justify-center py-8 md:py-20 h-full">

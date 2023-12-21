@@ -4,8 +4,8 @@ const ContactUs = () => {
     return ( 
         <main className="relative top-[100px] md:top-[50px] grid grid-cols-1 md:grid-cols-2 items-center justify-center">
             <div className="flex flex-col items-center justify-center mb-5 md:hidden">
-                    <h1 className="text-[40px] text-dark font-semibold text-center">How can we help?</h1>
-                    <p className="text-[16px] text-dark text-center max-w-[70%]">We&rsquo;d love to hear from you. Leave a message
+                    <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center">How can we help?</h1>
+                    <p className="text-[14px] md:text-[16px] text-dark text-center max-w-[70%]">We&rsquo;d love to hear from you. Leave a message
                         and we&rsquo;ll respond as soon as possible</p>
             </div>
 

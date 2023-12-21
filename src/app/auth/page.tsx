@@ -10,7 +10,7 @@ const Auth = () => {
         <main className="grid grid-cols-1 md:grid-cols-2 items-center py-8 md:py-0">
             {isLogin ?
                 <div className="grid gap-2 md:hidden mb-5 px-[5%]">
-                    <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Welcome back to <span className="text-blue">QR code</span></h1>
+                    <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Welcome back to <br /> <span className="text-blue">QR-Go</span></h1>
                     <p className="text-[14px] md:text-[16px] text-dark text-center">Login with your details you entered during registration.</p>
                 </div>
                 :

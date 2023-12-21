@@ -32,8 +32,8 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
             <p className="text-[13px] md:text-[14px] text-dark text-center">New here? <span className="text-darkblue cursor-pointer" onClick={onSwitch}>Create an account</span></p> 
         </form>
 
-        <Link href="/home" className='flex items-center gap-2 text-dark font-semibold text-md'>
-          <FaBackward className="text-blue animate-heart-beat"/>  Back To Home
+        <Link href="/home" className='flex items-center gap-2 text-dark font-semibold text-sm md:text-md'>
+          <FaBackward className="text-blue"/>  Back To Home
         </Link>
         
     </main>

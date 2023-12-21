@@ -8,12 +8,12 @@ const LandingHero = () => {
         <main className="w-full px-[5%] relative top-[80px] py-10">
             <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center justify-center place-items-center">
                 <section className="grid gap-4">
-                    <h1 className="w-full lg:w-[80%] text-[34px] lg:text-[38px] xl:text-[42px] text-dark font-semibold text-center md:text-left"><span className="text-blue">Create a QR code</span> to
+                    <h1 className="w-full lg:w-[80%] text-[28px] md:text-[36px] lg:text-[40px] xl:text-[42px] text-dark font-semibold text-center md:text-left"><span className="text-blue">Create a QR code</span> to
                         both Safeguard your data
                         and <span className="text-blue">advertise</span> your <span>business</span> or
                         <span className="text-blue"> idea.</span></h1>
 
-                    <p className="w-full lg:w-[80%] text-[16px] md:text-[18px] text-dark font-medium text-center md:text-left">Our platform allows you to effortlessly generate QR codes,
+                    <p className="w-full lg:w-[80%] text-[14px] md:text-[16px] lg:text-[18px] text-dark font-medium text-center md:text-left">Our platform allows you to effortlessly generate QR codes,
                         keep track of them, and analyze their performance
                         through detailed statistics.</p>
 

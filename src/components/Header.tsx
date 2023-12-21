@@ -24,7 +24,7 @@ const Header = () => {
                     <Image src="/img/logo.png" width={70} height={70} alt="logo"  className="w-full" />
                 </Link>
 
-                <nav className={`${isMenuOpen ? 'flex' : 'hidden'} absolute top-[83px] md:top-auto left-0 md:left-auto md:relative w-full md:w-[70%] xl:w-[60%] md:flex flex-col md:flex-row items-center justify-between bg-skyblue md:bg-none py-6 md:p-auto`}>
+                <nav className={`${isMenuOpen ? 'flex' : 'hidden'} absolute top-[82px] md:top-auto left-0 md:left-auto md:relative w-full md:w-[70%] xl:w-[60%] md:flex flex-col md:flex-row items-center justify-between bg-skyblue md:bg-none py-6 md:p-auto`}>
                     <div className="text-dark text-[16px] font-semibold  flex flex-col md:flex-row items-center justify-between gap-10 mb-10 md:mb-0">
                         <Link href="/home" className={pathName === "/home" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Home</Link>
                         <Link href="/about" className={pathName === "/about" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>AboutUs</Link>
