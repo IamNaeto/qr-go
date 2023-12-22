@@ -19,7 +19,7 @@ const LandingHero = () => {
 
                     <div className="flex items-center justify-center md:justify-start gap-4">
                         <GetStartedBtn />
-                        <Link href="/home" className="text-[14px] md:text-[16px] px-3 md:px-5 py-2 bg-white text-blue border-2 border-blue font-semibold rounded-md">Learn More</Link>
+                        <Link href="/home" className="text-[14px] md:text-[16px] px-3 md:px-5 py-2 bg-white text-blue border-2 border-blue font-semibold rounded-md hover:shadow-lg transition-all delay-150">Learn More</Link>
                     </div>
                 </section>
 

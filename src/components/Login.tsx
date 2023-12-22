@@ -14,7 +14,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
             <p className="text-[14px] md:text-[16px] text-dark text-center">Login with your details you entered during registration.</p>
         </div>
 
-        <form action="/profile" className="grid gap-4 text-[14px] md:text-[16px] text-dark">
+        <form action="/create" className="grid gap-4 text-[14px] md:text-[16px] text-dark">
             <label htmlFor="email">Email
                 <input type="email" name='email' id='email' placeholder="Enter email" className="input" required/>
             </label>
