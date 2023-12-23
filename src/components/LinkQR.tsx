@@ -43,7 +43,7 @@ const LinkQR = () => {
   };
 
   return (
-    <main className="relative top-[100px] w-full min-h-screen pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
+    <main className="relative top-[100px] w-full min-h-[70vh] pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
       <section className="grid gap-2">
         <h1 className="text-[28px] md:text-[32px] text-dark font-semibold text-center md:text-left">Enter URL</h1>
 
