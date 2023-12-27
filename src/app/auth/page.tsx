@@ -3,8 +3,21 @@ import Login from "@/components/Login";
 import SideView from "@/components/SideView";
 import SignUp from "@/components/SignUp";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/config";
+import { useRouter } from "next/navigation";
+
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true)
+
+    const [user] = useAuthState(auth);
+    const router = useRouter();
+
+
+        if(user){
+            router.push('/create')
+            return <h1>Loading...</h1>
+        }
 
     return (
         <main className="grid grid-cols-1 md:grid-cols-2 items-center py-8 md:py-0">

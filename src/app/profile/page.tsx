@@ -1,13 +1,17 @@
+"use client"
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import PrivateRoute from "@/components/PrivateRoute";
 import UserProfile from "@/components/UserProfile";
 
 const Profile = () => {
     return ( 
         <main>
-            <Header />
-            <UserProfile />
-            <Footer />
+            <PrivateRoute>
+                <Header />
+                <UserProfile />
+                <Footer />
+            </PrivateRoute>
         </main>
      );
 }

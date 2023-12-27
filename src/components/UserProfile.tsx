@@ -3,7 +3,7 @@ import Image from "next/image";
 const UserProfile = () => {
     return (
         <main className="w-full h-full relative top-[90px] md:top-[95px] mb-10">
-            <section className="bg-darkblue w-full h-[150px] mt-0 md:mt-5 mb-20 px-[5%] py-5">
+            <section className="bg-darkblue w-full h-[150px] mb-20 px-[5%] py-5">
                 <div className="relative flex justify-between gap-5 w-full h-full">
                     <div className="grid gap-2">
                         <h1 className="text-[24px] text-white font-semibold pt-3">Profile Information</h1>
