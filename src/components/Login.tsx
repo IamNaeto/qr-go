@@ -40,13 +40,16 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
       const res = await signInWithEmailAndPassword(email, password)
       // console.log({res})
-      setEmail("")
-      setPassword("")
-      setRemember(false)
-      router.push('/create')
 
+      if(res === undefined){
+        setError("Incorrect details, review or signup");
+        return null
+      }
+      
       // Additional logic after successful login
+      router.push('/create')
       console.log("User loggedIn successfully!");
+
     } catch (error:any) {
       console.error("Error logging in:", error.message);
       setError(error.message);

@@ -43,13 +43,11 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
 
       const res = await createUserWithEmailAndPassword(email, password)
       // console.log({res})
-      
-      // setEmail("")
-      // setPassword("")
-      // setConfirmPassword("")
-      // setFirstName("")
-      // setLastName("")
-      // setError(null)
+
+      if(res === undefined){
+        setError("Details already exist, login instead!");
+        return null
+      }
 
       // Handle successful signup (e.g., redirect to home page)
       console.log("User created successfully!");
