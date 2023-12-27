@@ -11,7 +11,7 @@ interface LoginProps {
 }
 
 const Login: FC<LoginProps> = ({ onSwitch }) => {
-    const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-  
+
     try {
       // Basic form validation
       if (!email || !password) {
@@ -35,77 +35,77 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
       setIsLoading(true);
 
       setTimeout(() => {
-          setIsLoading(false);
+        setIsLoading(false);
       }, 3000);
 
       const res = await signInWithEmailAndPassword(email, password)
       // console.log({res})
 
-      if(res === undefined){
+      if (res === undefined) {
         setError("Incorrect details, review or signup");
         return null
       }
-      
+
       // Additional logic after successful login
       router.push('/create')
       console.log("User loggedIn successfully!");
 
-    } catch (error:any) {
+    } catch (error: any) {
       console.error("Error logging in:", error.message);
       setError(error.message);
     }
 
   };
 
-    return ( 
-        <main className="w-full grid gap-4 px-[5%] md:px-[10%]">
-        <div className="hidden md:grid gap-2">
-            <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Welcome back to <span className="text-blue">QR code</span></h1>
-            <p className="text-[14px] md:text-[16px] text-dark text-center">Login with your details you entered during registration.</p>
-        </div>
+  return (
+    <main className="w-full grid gap-4 px-[5%] md:px-[10%]">
+      <div className="hidden md:grid gap-2">
+        <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Welcome back to <span className="text-blue">QR code</span></h1>
+        <p className="text-[14px] md:text-[16px] text-dark text-center">Login with your details you entered during registration.</p>
+      </div>
 
-        <form action="" className="grid gap-4 text-[14px] md:text-[16px] text-dark">
-            <label htmlFor="email">Email
-                <input
-                onChange={(e) => setEmail(e.target.value)}  
-                type="email" name='email' id='email' placeholder="Enter email" className="input" required/>
-            </label>
-            <label htmlFor="pword">Password
-                <input
-                onChange={(e) => setPassword(e.target.value)}  
-                type="password" name="pword" id='pword' placeholder="Enter password" className="input" required/>
-            </label>
-           
-            <label htmlFor="remember" className="text-[14px] flex items-center gap-2"> 
-                <input type="checkbox" name='remember' id='remember' required/>
-                Remember password
-            </label>
+      <form action="" className="grid gap-4 text-[14px] md:text-[16px] text-dark">
+        <label htmlFor="email">Email
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email" name='email' id='email' placeholder="Enter email" className="input" required />
+        </label>
+        <label htmlFor="pword">Password
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password" name="pword" id='pword' placeholder="Enter password" className="input" required />
+        </label>
 
-            {/* Display error message if there's an error */}
-            {error && <p className="text-red-500">{error}</p>}
+        <label htmlFor="remember" className="text-[14px] flex items-center gap-2">
+          <input type="checkbox" name='remember' id='remember' required />
+          Remember password
+        </label>
 
-            <button
-                  onClick={handleLogin}
-                  className="flex items-center justify-center bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold"
-                >
-                  {isLoading ? (
-                            <>
-                                <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
-                            </>
-                        ) : (
-                            'Login'
-                        )}
-                </button>
+        {/* Display error message if there's an error */}
+        {error && <p className="text-red-500">{error}</p>}
 
-            <p className="text-[13px] md:text-[14px] text-dark text-center">New here? <span className="text-darkblue cursor-pointer" onClick={onSwitch}>Create an account</span></p> 
-        </form>
+        <button
+          onClick={handleLogin}
+          className="flex items-center justify-center bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold"
+        >
+          {isLoading ? (
+            <>
+              <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
+            </>
+          ) : (
+            'Login'
+          )}
+        </button>
 
-        <Link href="/home" className='flex items-center gap-2 text-dark font-semibold text-sm md:text-md'>
-          <FaBackward className="text-blue"/>  Back To Home
-        </Link>
-        
+        <p className="text-[13px] md:text-[14px] text-dark text-center">New here? <span className="text-darkblue cursor-pointer" onClick={onSwitch}>Create an account</span></p>
+      </form>
+
+      <Link href="/home" className='flex items-center gap-2 text-dark font-semibold text-sm md:text-md'>
+        <FaBackward className="text-blue" />  Back To Home
+      </Link>
+
     </main>
-     );
+  );
 }
- 
+
 export default Login;
