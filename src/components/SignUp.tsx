@@ -103,7 +103,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
                                 <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
                             </>
                         ) : (
-                            'Read More'
+                            'Create Account'
                         )}
                 </button>
 
