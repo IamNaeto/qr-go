@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useDropzone, FileRejection } from "react-dropzone";
 import QRCode from "qrcode";
 import { BarLoader } from "react-spinners";
+import { TbLoader3 } from "react-icons/tb";
 
 const FileQR = () => {
   const [qrCode, setQrCode] = useState<string | null>(null);
@@ -11,6 +12,7 @@ const FileQR = () => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   const [uniqueIdentifier, setUniqueIdentifier] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const generateUniqueIdentifier = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -81,6 +83,15 @@ const FileQR = () => {
     }
   };
 
+  // Handle and stimulate a loading process
+  const handleClick = () => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+        setIsLoading(false);
+    }, 3000);
+};
+
   return (
     <main className="relative top-[100px] w-full min-h-[70vh] pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
       <section className="grid gap-2">
@@ -105,8 +116,14 @@ const FileQR = () => {
               {uploadedFileName ? `Uploaded File: ${uploadedFileName}` : ""}
             </p>
           )}
-          <button className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150">
-            Browse File
+          <button onClick={handleClick} className="flex items-center justify-center w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150">
+                      {isLoading ? (
+                            <>
+                                <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
+                            </>
+                        ) : (
+                            'Browse File'
+                        )}
           </button>
         </div>
 
