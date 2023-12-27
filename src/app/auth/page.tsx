@@ -2,23 +2,43 @@
 import Login from "@/components/Login";
 import SideView from "@/components/SideView";
 import SignUp from "@/components/SignUp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
+import { TbLoader3 } from "react-icons/tb";
 
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true)
+    const [isLoading, setIsLoading] = useState(false);
 
     const [user] = useAuthState(auth);
     const router = useRouter();
 
 
-        if(user){
-            router.push('/create')
-            return <h1>Loading...</h1>
+    useEffect(() => {
+        if (user) {
+            router.push('/create');
+            setIsLoading(true);
+    
+          // Simulate a loading process
+          const timeoutId = setTimeout(() => {
+            setIsLoading(false);
+            
+          }, 2000);
+    
+          // Clear the timeout if the component unmounts or user logs out
+          return () => clearTimeout(timeoutId);
         }
-
+      }, [user, router]);
+    
+      // If user is loading, show a loader
+      if (isLoading) {
+        return <div className="w-full h-screen flex items-center justify-center">
+            <TbLoader3 className="animate-spin text-darkblue text-7xl font-semibold cursor-not-allowed text-center" />;
+        </div>
+      }
+    
     return (
         <main className="grid grid-cols-1 md:grid-cols-2 items-center py-8 md:py-0">
             {isLogin ?

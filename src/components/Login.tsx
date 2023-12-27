@@ -4,6 +4,7 @@ import { FaBackward } from 'react-icons/fa6';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
 import { useRouter } from 'next/navigation';
+import { TbLoader3 } from "react-icons/tb";
 
 interface LoginProps {
   onSwitch: MouseEventHandler<HTMLSpanElement>;
@@ -14,6 +15,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter()
 
@@ -21,6 +23,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+  
     try {
       // Basic form validation
       if (!email || !password) {
@@ -28,8 +31,15 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
         return;
       }
 
+      // Simulate a loading process
+      setIsLoading(true);
+
+      setTimeout(() => {
+          setIsLoading(false);
+      }, 3000);
+
       const res = await signInWithEmailAndPassword(email, password)
-      // console.log(res)
+      // console.log({res})
       setEmail("")
       setPassword("")
       setRemember(false)
@@ -41,6 +51,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
       console.error("Error logging in:", error.message);
       setError(error.message);
     }
+
   };
 
     return ( 
@@ -70,7 +81,18 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
             {/* Display error message if there's an error */}
             {error && <p className="text-red-500">{error}</p>}
 
-            <button onClick={handleLogin} className="bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold">Login</button>
+            <button
+                  onClick={handleLogin}
+                  className="flex items-center justify-center bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold"
+                >
+                  {isLoading ? (
+                            <>
+                                <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
+                            </>
+                        ) : (
+                            'Read More'
+                        )}
+                </button>
 
             <p className="text-[13px] md:text-[14px] text-dark text-center">New here? <span className="text-darkblue cursor-pointer" onClick={onSwitch}>Create an account</span></p> 
         </form>

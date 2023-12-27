@@ -3,6 +3,7 @@ import React, { FC, MouseEventHandler, useState } from 'react';
 import { FaBackward } from 'react-icons/fa6';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
+import { TbLoader3 } from "react-icons/tb";
 
 interface SignUpProps {
   onSwitch: MouseEventHandler<HTMLSpanElement>;
@@ -15,6 +16,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth)
 
@@ -32,14 +34,22 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
         return;
       }
 
+      // Simulate a loading process
+    setIsLoading(true);
+
+    setTimeout(() => {
+        setIsLoading(false);
+    }, 3000);
+
       const res = await createUserWithEmailAndPassword(email, password)
       // console.log({res})
-      setEmail("")
-      setPassword("")
-      setConfirmPassword("")
-      setFirstName("")
-      setLastName("")
-      setError(null)
+      
+      // setEmail("")
+      // setPassword("")
+      // setConfirmPassword("")
+      // setFirstName("")
+      // setLastName("")
+      // setError(null)
 
       // Handle successful signup (e.g., redirect to home page)
       console.log("User created successfully!");
@@ -47,6 +57,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
       console.error("Error signing up:", error.message);
       setError(error.message);
     }
+
   };
 
     return ( 
@@ -85,9 +96,15 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
 
                 <button
                   onClick={handleSignUp}
-                  className="bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold"
+                  className="flex items-center justify-center bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold"
                 >
-                  Create account
+                  {isLoading ? (
+                            <>
+                                <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
+                            </>
+                        ) : (
+                            'Read More'
+                        )}
                 </button>
 
                 {error && <p className="text-red-500">{error}</p>}
