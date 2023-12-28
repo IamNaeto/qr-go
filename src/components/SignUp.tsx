@@ -20,10 +20,6 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const validationError = () => toast.error("All fields are required.");
-  const passwordError = () => toast.error("Passwords do not match.");
-  const detailsError = () => toast.error("Details already exist, login instead!");
-  const accountSuccess = () => toast.success("Account created successfully! Login.");
 
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth)
 
@@ -32,12 +28,12 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
     try {
       // Basic form validation
       if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        validationError()
+        toast.error("All fields are required.")
         return;
       }
 
       if (password !== confirmPassword) {
-        passwordError()
+        toast.error("Passwords do not match.")
         return;
       }
 
@@ -52,12 +48,12 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
       // console.log({res})
 
       if(res === undefined){
-        detailsError()
+        toast.error("Details already exist, login instead!")
         return null
       }
 
       // Handle successful signup (e.g., redirect to home page)
-      accountSuccess()
+      toast.success("Account created successfully! Login.")
       console.log("Account created successfully!");
 
     } catch (error: any) {

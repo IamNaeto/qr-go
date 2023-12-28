@@ -21,10 +21,6 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
   const router = useRouter()
 
-  const validationError = () => toast.error("Email and password are required!");
-  const detailsError = () => toast.error("Incorrect details, review or signup.");
-  const loginSuccess = () => toast.success("User loggedIn successfully!");
-
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
@@ -33,7 +29,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
     try {
       // Basic form validation
       if (!email || !password) {
-        validationError()
+        toast.error("Email and password are required!")
         return;
       }
 
@@ -48,14 +44,13 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
       // console.log({res})
 
       if (res === undefined) {
-        detailsError()
+        toast.error("Incorrect details, review or signup.")
         return null
       }
 
       // Additional logic after successful login
-
       // router.push('/create')
-      loginSuccess()
+      toast.success("User loggedIn successfully!")
       router.replace('/create')
       console.log("User loggedIn successfully!");
 

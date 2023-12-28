@@ -10,25 +10,36 @@ const LinkQR = () => {
   const [qrCode, setQrCode] = useState<string | null>(null);
   const qrCodeRef = useRef<HTMLImageElement>(null);
 
-  const generateError = () => toast.error("Error generating QR code");
-  const generateSuccess = () => toast.success("QR-Code generated successfully!");
-
   const generateQRCode = async () => {
     if (url.trim() !== "") {
       try {
         const generatedQRCode = await QRCode.toDataURL(url);
-        generateSuccess()
+        toast.success("QR-Code generated successfully!")
         setQrCode(generatedQRCode);
       } catch (error) {
-        generateError()
+        toast.error("Error generating QR code, check console for details")
         console.error("Error generating QR code:", error);
       }
     }
   };
 
-  const handleGenerateClick = (e: React.FormEvent) => {
+  const handleGenerateClick = async (e: React.FormEvent) => {
     e.preventDefault();
-    generateQRCode();
+  
+    if (url.trim() === "") {
+      toast.error("No URL provided. Please enter a valid URL.");
+      return;
+    }
+  
+    try {
+      // Check if the entered value is a valid URL
+      new URL(url);
+  
+      // If it's a valid URL, proceed to generate QR code
+      await generateQRCode();
+    } catch (error) {
+      toast.error("Not a valid URL. Please enter a valid URL.");
+    }
   };
 
   const downloadAsJPG = () => {
@@ -58,12 +69,12 @@ const LinkQR = () => {
 
           <form onSubmit={handleGenerateClick} className="grid gap-4 text[14px] md:text-[16px] text-dark">
             <input
-              type="url"
+              
               placeholder="Enter your URL here"
               className="input pl-11"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              required />
+              />
             <button
               type="submit"
               className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150"

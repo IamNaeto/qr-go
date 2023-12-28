@@ -5,10 +5,12 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { auth } from "@/app/firebase/config";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { TbLoader3 } from "react-icons/tb";
 
 const UserInfo = () => {
     // Manage visibility of nav menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     
     const [user] = useAuthState(auth);
 
@@ -16,6 +18,10 @@ const UserInfo = () => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+
+    const handleSignOut = () =>{
+        signOut(auth)        
+    }
 
     return (
         <main className="w-full relative top-0">
@@ -39,7 +45,7 @@ const UserInfo = () => {
                     <Link href="/create" className="hover:font-semibold hover-text-darkblue transition-all delay-150">Create</Link>
                     <Link href="profile" className="hover:font-semibold hover-text-darkblue transition-all delay-150">Profile</Link>
                     <p
-                        onClick={() => signOut(auth)}
+                        onClick={handleSignOut}
                         className="hover:font-semibold hover-text-darkblue transition-all delay-150 cursor-pointer">Logout</p>
                 </section>
             }

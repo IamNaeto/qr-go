@@ -16,9 +16,6 @@ const FileQR = () => {
   const [uniqueIdentifier, setUniqueIdentifier] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const generateError = () => toast.error("Error generating QR code");
-  const generateSuccess = () => toast.success("QR-Code generated successfully!");
-
   const generateUniqueIdentifier = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   };
@@ -63,10 +60,10 @@ const FileQR = () => {
       try {
         const qrCodeData = `YourBaseURL/${uniqueIdentifier}`;
         const generatedQRCode = await QRCode.toDataURL(qrCodeData);
-        generateSuccess()
+        toast.success("QR-Code generated successfully!")
         setQrCode(generatedQRCode);
       } catch (error) {
-        generateError()
+        toast.error("Error generating QR code, check console for more details")
         console.error("Error generating QR code:", error);
       }
     }
@@ -98,6 +95,25 @@ const FileQR = () => {
       setIsLoading(false);
     }, 3000);
   };
+
+  const handleGenerateClick = () => {
+    if (uploadProgress === 100) {
+      generateQRCode();
+    }
+    if (uploadProgress === 0) {
+      toast.error("No file selected. Please browse a file to upload.");
+      setBackgroundColor("");
+      setUploadProgress(0);
+      setUploadedFileName(null);
+      setUniqueIdentifier(null);
+    } else if (uploadProgress < 100) {
+      toast.error("File upload failed. Please try again.");
+      setBackgroundColor("");
+      setUploadProgress(0);
+      setUploadedFileName(null);
+      setUniqueIdentifier(null);
+    }
+  }
 
   return (
     <>
@@ -137,11 +153,7 @@ const FileQR = () => {
           </div>
 
           <button
-            onClick={() => {
-              if (uploadProgress === 100) {
-                generateQRCode();
-              }
-            }}
+            onClick={handleGenerateClick}
             className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150"
           >
             Generate
