@@ -16,7 +16,8 @@ const PrivateRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
 useEffect(() => {
     if (!user) {
-        router.push('/auth');
+        // router.push('/auth');
+        router.replace('/auth')
         setIsLoading(true);
 
       // Simulate a loading process

@@ -4,6 +4,8 @@ import { FaBackward } from 'react-icons/fa6';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
 import { TbLoader3 } from "react-icons/tb";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface SignUpProps {
   onSwitch: MouseEventHandler<HTMLSpanElement>;
@@ -18,6 +20,11 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const validationError = () => toast.error("All fields are required.");
+  const passwordError = () => toast.error("Passwords do not match.");
+  const detailsError = () => toast.error("Details already exist, login instead!");
+  const accountSuccess = () => toast.success("Account created successfully! Login.");
+
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth)
 
   const handleSignUp = async (e: { preventDefault: () => void; }) => {
@@ -25,12 +32,12 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
     try {
       // Basic form validation
       if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        setError("All fields are required");
+        validationError()
         return;
       }
 
       if (password !== confirmPassword) {
-        setError("Passwords do not match");
+        passwordError()
         return;
       }
 
@@ -45,12 +52,14 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
       // console.log({res})
 
       if(res === undefined){
-        setError("Details already exist, login instead!");
+        detailsError()
         return null
       }
 
       // Handle successful signup (e.g., redirect to home page)
-      console.log("User created successfully!");
+      accountSuccess()
+      console.log("Account created successfully!");
+
     } catch (error: any) {
       console.error("Error signing up:", error.message);
       setError(error.message);
@@ -60,6 +69,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
 
     return ( 
         <main className="w-full grid gap-4 px-[5%] md:px-[10%]">
+        <ToastContainer />
             <div className="hidden md:grid gap-2">
                 <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Generate a <span className="text-blue">QR code</span></h1>
                 <p className="text-[14px] md:text-[16px] text-dark text-center">Get started and generate a Qr code on the go</p>

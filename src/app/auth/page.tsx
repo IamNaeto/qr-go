@@ -18,14 +18,15 @@ const Auth = () => {
 
     useEffect(() => {
         if (user) {
-            router.push('/create');
+            // router.push('/create');
+            router.replace('/create')
             setIsLoading(true);
     
           // Simulate a loading process
           const timeoutId = setTimeout(() => {
             setIsLoading(false);
             
-          }, 2000);
+          }, 500);
     
           // Clear the timeout if the component unmounts or user logs out
           return () => clearTimeout(timeoutId);

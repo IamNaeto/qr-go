@@ -5,6 +5,8 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
 import { useRouter } from 'next/navigation';
 import { TbLoader3 } from "react-icons/tb";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface LoginProps {
   onSwitch: MouseEventHandler<HTMLSpanElement>;
@@ -19,6 +21,10 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
   const router = useRouter()
 
+  const validationError = () => toast.error("Email and password are required!");
+  const detailsError = () => toast.error("Incorrect details, review or signup.");
+  const loginSuccess = () => toast.success("User loggedIn successfully!");
+
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
@@ -27,7 +33,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
     try {
       // Basic form validation
       if (!email || !password) {
-        setError("Email and password are required");
+        validationError()
         return;
       }
 
@@ -42,12 +48,15 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
       // console.log({res})
 
       if (res === undefined) {
-        setError("Incorrect details, review or signup");
+        detailsError()
         return null
       }
 
       // Additional logic after successful login
-      router.push('/create')
+
+      // router.push('/create')
+      loginSuccess()
+      router.replace('/create')
       console.log("User loggedIn successfully!");
 
     } catch (error: any) {
@@ -59,6 +68,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
   return (
     <main className="w-full grid gap-4 px-[5%] md:px-[10%]">
+      <ToastContainer />
       <div className="hidden md:grid gap-2">
         <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Welcome back to <span className="text-blue">QR code</span></h1>
         <p className="text-[14px] md:text-[16px] text-dark text-center">Login with your details you entered during registration.</p>
