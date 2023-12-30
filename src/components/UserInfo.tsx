@@ -5,12 +5,10 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { auth } from "@/app/firebase/config";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { TbLoader3 } from "react-icons/tb";
 
 const UserInfo = () => {
     // Manage visibility of nav menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     
     const [user] = useAuthState(auth);
 

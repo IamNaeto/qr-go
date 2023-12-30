@@ -50,8 +50,11 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
 
       // Additional logic after successful login
       // router.push('/create')
-      toast.success("User loggedIn successfully!")
-      router.replace('/create')
+      toast.success("LoggedIn successfully!")
+      setTimeout(() => {
+        router.replace('/create')
+        setIsLoading(false);
+      }, 2000);
       console.log("User loggedIn successfully!");
 
     } catch (error: any) {
