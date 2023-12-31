@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React, { FC, MouseEventHandler, useState } from 'react';
 import { FaBackward } from 'react-icons/fa6';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+// import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
 import { TbLoader3 } from "react-icons/tb";
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,49 +18,87 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth)
+  // const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth)
 
   const handleSignUp = async (e: { preventDefault: () => void; }) => {
       e.preventDefault();
-    try {
-      // Basic form validation
-      if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        toast.error("All fields are required.")
-        return;
-      }
+    // try {
+    //   // Basic form validation
+    //   if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    //     toast.error("All fields are required.")
+    //     return;
+    //   }
 
-      if (password !== confirmPassword) {
-        toast.error("Passwords do not match.")
-        return;
-      }
+    //   if (password !== confirmPassword) {
+    //     toast.error("Passwords do not match.")
+    //     return;
+    //   }
 
-      // Simulate a loading process
+    //   // Simulate a loading process
+    // setIsLoading(true);
+
+    // setTimeout(() => {
+    //     setIsLoading(false);
+    // }, 3000);
+
+    //   const res = await createUserWithEmailAndPassword(email, password)
+    //   // console.log({res})
+
+    //   if(res === undefined){
+    //     toast.error("Details already exist, login instead!")
+    //     return null
+    //   }
+
+    //   // Handle successful signup (e.g., redirect to home page)
+    //   toast.success("Account created successfully! Login.")
+    //   console.log("Account created successfully!");
+
+    // } catch (error: any) {
+    //   console.error("Error signing up:", error.message);
+    //   setError(error.message);
+    // }
+
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      toast.error("All fields are required.")
+      return;
+    }
+
+    // Simulate a loading process
     setIsLoading(true);
 
-    setTimeout(() => {
-        setIsLoading(false);
-    }, 3000);
-
-      const res = await createUserWithEmailAndPassword(email, password)
-      // console.log({res})
-
-      if(res === undefined){
-        toast.error("Details already exist, login instead!")
-        return null
-      }
-
-      // Handle successful signup (e.g., redirect to home page)
-      toast.success("Account created successfully! Login.")
-      console.log("Account created successfully!");
-
-    } catch (error: any) {
-      console.error("Error signing up:", error.message);
-      setError(error.message);
-    }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        toast.success("Account created successfully")
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log("Registration error:", error);
+        if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password");
+          setIsLoading(false);
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Invalid Email format");
+          setIsLoading(false);
+        } else if (error.code === "auth/weak-password") {
+          toast.error("Password should be at least 6 characters");
+          setIsLoading(false);
+        } else if (error.code === "auth/email-already-in-use") {
+          toast.error("Email already in use");
+          setIsLoading(false);
+        } else {
+          toast.error("Authentication failed");
+          setIsLoading(false);
+          return;
+        }
+      });
 
   };
 
@@ -111,7 +150,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
                         )}
                 </button>
 
-                {error && <p className="text-red-500">{error}</p>}
+                {/* {error && <p className="text-red-500">{error}</p>} */}
 
                 <p className="text-[13px] md:text-[14px] text-dark text-center">Already have an account? <span className="text-darkblue cursor-pointer" onClick={onSwitch}>Login</span></p> 
             </form>

@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React, { FC, MouseEventHandler, useState } from 'react';
 import { FaBackward } from 'react-icons/fa6';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+// import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '@/app/firebase/config';
 import { useRouter } from 'next/navigation';
 import { TbLoader3 } from "react-icons/tb";
@@ -16,51 +17,93 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter()
 
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
+  // const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
 
   const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    try {
-      // Basic form validation
-      if (!email || !password) {
-        toast.error("Email and password are required!")
-        return;
-      }
+    // try {
+    //   // Basic form validation
+    //   if (!email || !password) {
+    //     toast.error("Email and password are required!")
+    //     return;
+    //   }
 
-      // Simulate a loading process
-      setIsLoading(true);
+    //   // Simulate a loading process
+    //   setIsLoading(true);
 
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //   }, 3000);
 
-      const res = await signInWithEmailAndPassword(email, password)
-      // console.log({res})
+    //   const res = await signInWithEmailAndPassword(email, password)
+    //   // console.log({res})
 
-      if (res === undefined) {
-        toast.error("Incorrect details, review or signup.")
-        return null
-      }
+    //   if (res === undefined) {
+    //     toast.error("Incorrect details, review or signup.")
+    //     return null
+    //   }
 
-      // Additional logic after successful login
-      // router.push('/create')
-      toast.success("LoggedIn successfully!")
-      setTimeout(() => {
-        router.replace('/create')
-        setIsLoading(false);
-      }, 2000);
-      console.log("User loggedIn successfully!");
+    //   // Additional logic after successful login
+    //   // router.push('/create')
+    //   toast.success("LoggedIn successfully!")
+    //   setTimeout(() => {
+    //     router.replace('/create')
+    //     setIsLoading(false);
+    //   }, 2000);
+    //   console.log("User loggedIn successfully!");
 
-    } catch (error: any) {
-      console.error("Error logging in:", error.message);
-      setError(error.message);
+    // } catch (error: any) {
+    //   console.error("Error logging in:", error.message);
+    //   setError(error.message);
+    // }
+
+    
+    if (!email || !password) {
+      toast.error("Email and password are required!")
+      return;
     }
+
+    // Simulate a loading process
+    setIsLoading(true);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        toast.success("Login successful")
+        setTimeout(() => {
+          router.replace("/create");
+        }, 3000);
+      })
+
+      .catch((error) => {
+        console.log(error);
+        if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password")
+          setIsLoading(false);
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Invalid Email format");
+          setIsLoading(false);
+        } else if (error.code === "auth/invalid-login-credentials") {
+          toast.error("Invalid login credentials, register");
+          setIsLoading(false);
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("Invalid-credential, register");
+          setIsLoading(false);
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too-many-requests, try in the next 2mins");
+          setIsLoading(false);
+        } else {
+          toast.error("Authentication failed");
+          setIsLoading(false);
+          return;
+        }
+      });
 
   };
 
@@ -90,7 +133,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
         </label>
 
         {/* Display error message if there's an error */}
-        {error && <p className="text-red-500">{error}</p>}
+        {/* {error && <p className="text-red-500">{error}</p>} */}
 
         <button
           onClick={handleLogin}
