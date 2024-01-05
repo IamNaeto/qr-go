@@ -4,6 +4,8 @@ import Image from "next/image";
 import QRCode from "qrcode";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from "next/link";
+import { FaBackward } from "react-icons/fa6";
 
 const LinkQR = () => {
   const [url, setUrl] = useState<string>("");
@@ -63,8 +65,12 @@ const LinkQR = () => {
   return (
     <>
       <ToastContainer />
-      <main className="relative top-[100px] w-full min-h-[70vh] pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
+      <main className="relative top-[100px] w-full min-h-screen pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
         <section className="grid gap-2">
+          <Link href="/create" className='flex items-center gap-2 text-dark font-semibold text-lg md:text-md mb-4'>
+                <FaBackward className="text-blue"/>  Back
+          </Link>
+
           <h1 className="text-[28px] md:text-[32px] text-dark font-semibold text-center md:text-left">Enter URL</h1>
 
           <form onSubmit={handleGenerateClick} className="grid gap-4 text[14px] md:text-[16px] text-dark">

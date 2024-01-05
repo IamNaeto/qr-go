@@ -7,6 +7,8 @@ import { BarLoader } from "react-spinners";
 import { TbLoader3 } from "react-icons/tb";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from "next/link";
+import { FaBackward } from "react-icons/fa6";
 
 const FileQR = () => {
   const [qrCode, setQrCode] = useState<string | null>(null);
@@ -118,8 +120,12 @@ const FileQR = () => {
   return (
     <>
       <ToastContainer />
-      <main className="relative top-[100px] w-full min-h-[70vh] pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
+      <main className="relative top-[100px] w-full min-h-screen pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
         <section className="grid gap-2">
+        <Link href="/create" className='flex items-center gap-2 text-dark font-semibold text-lg md:text-md mb-4'>
+                <FaBackward className="text-blue"/>  Back
+        </Link>
+
           <h1 className="text-[28px] md:text-[32px] text-dark font-semibold text-center md:text-left">Upload File</h1>
 
           <div
@@ -164,7 +170,7 @@ const FileQR = () => {
           <div className="w-full md:w-[80%] border-dashed border-[3px] p-8 rounded-xl grid grid-cols-1 items-center justify-center place-items-center gap-4">
             {!qrCode && (
               <h1 className="text-[24px] text-dark text-center font-semibold">
-                Generated QR-Code appears here and ready to download. <br /><br /> Drag and drop a file or browse to create your QR-Code.
+                Generated QR-Code appears here and ready to download. <br /><br /> Drag and drop a file or browse a file, then click on generate to create your QR-Code.
                 <br /><br /> Enjoy!!!
               </h1>
             )}

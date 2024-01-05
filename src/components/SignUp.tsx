@@ -1,7 +1,4 @@
-import Link from 'next/link';
 import React, { FC, MouseEventHandler, useState } from 'react';
-import { FaBackward } from 'react-icons/fa6';
-// import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/app/firebase/config';
 import { TbLoader3 } from "react-icons/tb";
@@ -18,50 +15,10 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  // const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
-
-  // const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth)
 
   const handleSignUp = async (e: { preventDefault: () => void; }) => {
       e.preventDefault();
-    // try {
-    //   // Basic form validation
-    //   if (!firstName || !lastName || !email || !password || !confirmPassword) {
-    //     toast.error("All fields are required.")
-    //     return;
-    //   }
-
-    //   if (password !== confirmPassword) {
-    //     toast.error("Passwords do not match.")
-    //     return;
-    //   }
-
-    //   // Simulate a loading process
-    // setIsLoading(true);
-
-    // setTimeout(() => {
-    //     setIsLoading(false);
-    // }, 3000);
-
-    //   const res = await createUserWithEmailAndPassword(email, password)
-    //   // console.log({res})
-
-    //   if(res === undefined){
-    //     toast.error("Details already exist, login instead!")
-    //     return null
-    //   }
-
-    //   // Handle successful signup (e.g., redirect to home page)
-    //   toast.success("Account created successfully! Login.")
-    //   console.log("Account created successfully!");
-
-    // } catch (error: any) {
-    //   console.error("Error signing up:", error.message);
-    //   setError(error.message);
-    // }
-
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       toast.error("All fields are required.")
@@ -150,14 +107,8 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
                         )}
                 </button>
 
-                {/* {error && <p className="text-red-500">{error}</p>} */}
-
                 <p className="text-[13px] md:text-[14px] text-dark text-center">Already have an account? <span className="text-darkblue cursor-pointer" onClick={onSwitch}>Login</span></p> 
             </form>
-            
-            <Link href="/home" className='flex items-center gap-2 text-dark font-semibold text-sm md:text-md'>
-                <FaBackward className="text-blue"/>  Back To Home
-            </Link>
         </main>
      );
 }
