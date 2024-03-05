@@ -55,7 +55,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
           toast.error("Too-many-requests, try in the next 2mins");
           setIsLoading(false);
         } else {
-          toast.error("Authentication failed");
+          toast.error(error.code);
           setIsLoading(false);
           return;
         }
