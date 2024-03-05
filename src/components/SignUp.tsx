@@ -23,6 +23,9 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       toast.error("All fields are required.")
       return;
+    } else if(password !== confirmPassword){
+      toast.error("Passwords not match")
+      return;
     }
 
     // Simulate a loading process
@@ -51,7 +54,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
           toast.error("Email already in use");
           setIsLoading(false);
         } else {
-          toast.error("Authentication failed");
+          toast.error(error.code);
           setIsLoading(false);
           return;
         }
@@ -96,11 +99,11 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
 
                 <button
                   onClick={handleSignUp}
-                  className="flex items-center justify-center bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold"
+                  className={`flex items-center justify-center bg-blue px-10 py-2 rounded-md text-[15px] md:text-[16px] text-center text-white font-semibold ${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
                 >
                   {isLoading ? (
                             <>
-                                <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold cursor-not-allowed" />
+                                <TbLoader3 className="animate-spin text-white text-2xl text-center font-semibold" />
                             </>
                         ) : (
                             'Create Account'
