@@ -1,36 +1,61 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 const QRGuildlines = () => {
-    return ( 
+    return (
         <main className="relative top-[100px] bg-skyblue w-full px-[5%] pt-28 pb-20 grid gap-4 bg-background" id="guildlines">
-            <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center">Create your Qr Code in matter of minutes.</h1>
+            <motion.h1
+                className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center"
+                initial={{ opacity: 0, y: -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+                viewport={{ once: true }}
+            >Create your Qr Code in matter of minutes.</motion.h1>
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                <div className="flex flex-col items-center justify-center text-center gap-2">
-                    <Image src="/img/content.png" width={150} height={150} alt="content" loading="lazy"/>
-                    
+                <motion.div
+                    className="flex flex-col items-center justify-center text-center gap-2"
+                    initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
+                    <Image src="/img/content.png" width={150} height={150} alt="content" loading="lazy" />
+
                     <h1 className="text-[18px] md:text-[22px] text-dark font-semibold max-w-[60%]">Choose the content of your Qr Code.</h1>
 
                     <p className="text-[14px] md:text-[16px] text-dark max-w-[40%]">Select either Url or File Upload</p>
-                </div>
+                </motion.div>
 
-                <div className="flex flex-col items-center justify-center text-center gap-2">
-                    <Image src="/img/design.png" width={150} height={150} alt="content" loading="lazy"/>
-                    
+                <motion.div
+                    className="flex flex-col items-center justify-center text-center gap-2"
+                    initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
+                    <Image src="/img/design.png" width={150} height={150} alt="content" loading="lazy" />
+
                     <h1 className="text-[18px] md:text-[22px] text-dark font-semibold max-w-[60%]">Customize and design</h1>
 
                     <p className="text-[14px] md:text-[16px] text-dark max-w-[70%]">Fill in all the information and use our QR generator to get a unique design</p>
-                </div>
+                </motion.div>
 
-                <div className="flex flex-col items-center justify-center text-center gap-2">
-                    <Image src="/img/download.png" width={150} height={150} alt="content" loading="lazy"/>
-                    
+                <motion.div
+                    className="flex flex-col items-center justify-center text-center gap-2"
+                    initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
+                    <Image src="/img/download.png" width={150} height={150} alt="content" loading="lazy" />
+
                     <h1 className="text-[18px] md:text-[22px] text-dark font-semibold max-w-[70%]">Download your QR code.</h1>
 
                     <p className="text-[14px] md:text-[16px] text-dark max-w-[70%]">Get your QR code in jpeg or PNG format, print it or show in digital form and Voila!</p>
-                </div>
+                </motion.div>
             </section>
         </main>
-     );
+    );
 }
- 
+
 export default QRGuildlines;

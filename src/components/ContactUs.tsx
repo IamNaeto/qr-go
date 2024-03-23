@@ -1,24 +1,44 @@
+import { motion } from "framer-motion";
 import SideView from "./SideView";
 
 const ContactUs = () => {
     return ( 
         <main className="relative top-[100px] md:top-[50px] grid grid-cols-1 md:grid-cols-2 items-center justify-center">
-            <div className="flex flex-col items-center justify-center mb-5 md:hidden">
+            <motion.div 
+            className="flex flex-col items-center justify-center mb-5 md:hidden"
+            initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+            >
                     <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center">How can we help?</h1>
                     <p className="text-[14px] md:text-[16px] text-dark text-center max-w-[70%]">We&rsquo;d love to hear from you. Leave a message
                         and we&rsquo;ll respond as soon as possible</p>
-            </div>
+            </motion.div>
 
             <SideView />
 
             <section className="pt-8 pb-20 md:py-20 px-[5%] md:px-[10%]">
-                <div className="md:flex flex-col items-center justify-center hidden">
+                <motion.div 
+                className="md:flex flex-col items-center justify-center hidden"
+                initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
                     <h1 className="text-[40px] text-dark font-semibold text-center">How can we help?</h1>
                     <p className="text-[16px] text-dark text-center max-w-[70%]">We&rsquo;d love to hear from you. Leave a message
                         and we&rsquo;ll respond as soon as possible</p>
-                </div>
+                </motion.div>
 
-                <form action="" className="grid gap-4 text-[16px] text-dark">
+                <motion.form 
+                action="" 
+                className="grid gap-4 text-[16px] text-dark"
+                initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
                     <label htmlFor="name">Name 
                         <input type="text" name="name" id="name" placeholder="Enter full name"className="input" required/>
                     </label>
@@ -31,7 +51,7 @@ const ContactUs = () => {
                     </label>
 
                     <button className="px-10 py-2 rounded-lg bg-blue hover:shadow-xl delay-150 text-[16px] text-white font-semibold">Send</button>
-                </form>
+                </motion.form>
             </section>
         </main>
      );

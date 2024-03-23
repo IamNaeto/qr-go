@@ -2,13 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import GetStartedBtn from "./GetStartedBtn";
+import { motion } from "framer-motion";
 
 const LandingHero = () => {
     return (
         <main className="w-full min-h-screen relative top-[80px] grid place-items-center">
             <main className="w-full px-[5%] py-7">
                 <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center justify-center place-items-center">
-                    <section className="grid gap-4">
+                    <motion.div
+                        className="grid gap-4"
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                        viewport={{ once: true }}
+                    >
                         <h1 className="w-full lg:w-[90%] text-[28px] md:text-[36px] lg:text-[40px] xl:text-[42px] text-dark font-bold text-center md:text-left"><span className="text-blue">Create a QR code</span> to
                             both Safeguard your data
                             and <span className="text-blue">advertise</span> your <span>business</span> or
@@ -22,14 +29,25 @@ const LandingHero = () => {
                             <GetStartedBtn />
                             <Link href="/home" className="text-[14px] md:text-[16px] px-3 md:px-5 py-2 bg-white text-blue border-2 border-blue font-semibold rounded-md hover:shadow-lg transition-all delay-150">Learn More</Link>
                         </div>
-                    </section>
+                    </motion.div>
 
-                    <section>
+                    <motion.section
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                        viewport={{ once: true }}
+                    >
                         <Image src="/img/landing-img.png" width={580} height={580} alt="hero-img" loading="lazy" />
-                    </section>
+                    </motion.section>
                 </section>
 
-                <section className="flex items-center gap-6 mt-6">
+                <motion.section
+                    className="flex items-center gap-6 mt-6"
+                    initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
                     <div className="flex items-center gap-4">
                         <FaXTwitter className="text-dark text-3xl p-1.5 rounded-full bg-skyblue hover:bg-darkblue hover:text-white transition-all delay-200 cursor-pointer" />
                         <FaFacebookF className="text-dark text-3xl p-1.5 rounded-full bg-skyblue hover:bg-darkblue hover:text-white transition-all delay-200 cursor-pointer" />
@@ -37,7 +55,7 @@ const LandingHero = () => {
                     </div>
 
                     <hr className="bg-darkblue h-1 w-full" />
-                </section>
+                </motion.section>
             </main>
         </main>
     );
