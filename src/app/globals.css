@@ -43,3 +43,17 @@
   outline: none;
   border: none;
 }
+
+  /*Keyframes for the dangling animation */
+  @keyframes dangle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(20px);
+    }
+  }
+
+  .dangling-picture {
+    animation: dangle 2s ease-in-out infinite;
+  }
