@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from "next/link";
 import { FaBackward } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 const FileQR = () => {
   const [qrCode, setQrCode] = useState<string | null>(null);
@@ -121,10 +122,16 @@ const FileQR = () => {
     <>
       <ToastContainer />
       <main className="relative top-[100px] w-full min-h-screen pt-5 md:pt-10 pb-20 px-[5%] grid grid-cols-1 md:grid-cols-2 items-center md:items-start gap-10 md:gap-52">
-        <section className="grid gap-2">
-        <Link href="/create" className='flex items-center gap-2 text-dark font-semibold text-lg md:text-md mb-4'>
-                <FaBackward className="text-blue"/>  Back
-        </Link>
+        <motion.section
+          className="grid gap-2"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          viewport={{ once: true }}
+        >
+          <Link href="/create" className='flex items-center gap-2 text-dark font-semibold text-lg md:text-md mb-4'>
+            <FaBackward className="text-blue" />  Back
+          </Link>
 
           <h1 className="text-[28px] md:text-[32px] text-dark font-semibold text-center md:text-left">Upload File</h1>
 
@@ -164,9 +171,15 @@ const FileQR = () => {
           >
             Generate
           </button>
-        </section>
+        </motion.section>
 
-        <section className="w-full grid place-items-center">
+        <motion.section
+          className="w-full grid place-items-center"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          viewport={{ once: true }}
+        >
           <div className="w-full md:w-[80%] border-dashed border-[3px] p-8 rounded-xl grid grid-cols-1 items-center justify-center place-items-center gap-4">
             {!qrCode && (
               <h1 className="text-[24px] text-dark text-center font-semibold">
@@ -175,25 +188,27 @@ const FileQR = () => {
               </h1>
             )}
 
-            {qrCode && <Image src={qrCode} alt="qrcode" width={200} height={200} />}
+            {qrCode && (<motion.section
+              className="w-full grid place-items-center gap-4"
+              initial={{ opacity: 0, scale: 0.7 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+                viewport={{ once: true }}
+            >
+              <Image src={qrCode} alt="qrcode" width={200} height={200} />
 
-            {qrCode && (
               <h1 className="text-[28px] text-dark text-center font-semibold">Download as</h1>
-            )}
+              <button onClick={downloadAsJPG} className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150">
+                JPG
+              </button>
 
-            {qrCode && (
-              <>
-                <button onClick={downloadAsJPG} className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150">
-                  JPG
-                </button>
-
-                <button onClick={downloadAsPNG} className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150">
-                  PNG
-                </button>
-              </>
+              <button onClick={downloadAsPNG} className="w-full text[14px] md:text-[16px] px-3 md:px-5 py-2.5 md:py-3 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150">
+                PNG
+              </button>
+            </motion.section>
             )}
           </div>
-        </section>
+        </motion.section>
       </main>
     </>
   );

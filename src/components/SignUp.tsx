@@ -8,20 +8,22 @@ import { motion } from 'framer-motion';
 
 interface SignUpProps {
   onSwitch: MouseEventHandler<HTMLSpanElement>;
+  setIsLogin: any
 }
 
-const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
+const SignUp: FC<SignUpProps> = ({ onSwitch, setIsLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUp = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    if (!firstName || !lastName ||!userName || !email || !password || !confirmPassword) {
       toast.error("All fields are required.")
       return;
     } else if (password !== confirmPassword) {
@@ -37,6 +39,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
         console.log(userCredential);
         toast.success("Account created successfully")
         setTimeout(() => {
+          setIsLogin(true)
           setIsLoading(false);
         }, 2000);
       })
@@ -94,6 +97,11 @@ const SignUp: FC<SignUpProps> = ({ onSwitch }) => {
           <input
             onChange={(e) => setLastName(e.target.value)}
             type="text" name='lastName' id='lname' placeholder="Enter your last name" className="input" required />
+        </label>
+        <label htmlFor="username">Username
+          <input
+            onChange={(e) => setUserName(e.target.value)}
+            type="text" name='userName' id='username' placeholder="Enter your user name" className="input" required />
         </label>
         <label htmlFor="email">Email
           <input

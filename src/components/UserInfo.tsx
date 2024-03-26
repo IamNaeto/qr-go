@@ -2,14 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { FaRegUser } from "react-icons/fa6";
+import { RiAiGenerate } from "react-icons/ri";
+import { TbLogout } from "react-icons/tb";
 import { auth } from "@/app/firebase/config";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { motion } from "framer-motion";
+import { useRouter } from 'next/navigation';
 
 const UserInfo = () => {
     // Manage visibility of nav menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+    const [isLoading, setIsLoading] = useState(false)
+
     const [user] = useAuthState(auth);
 
     //Control nav hide and show
@@ -17,8 +23,18 @@ const UserInfo = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const handleSignOut = () =>{
-        signOut(auth)        
+    // Signout logics
+    const router = useRouter()
+
+    const handleSignOut = () => {
+        setIsLoading(true)
+
+        setTimeout(() => {
+            setIsLoading(false)
+            signOut(auth)
+            // localStorage.removeItem('user')
+            router.replace("/home");
+        }, 2000);
     }
 
     return (
@@ -39,13 +55,24 @@ const UserInfo = () => {
             </section>
 
             {isMenuOpen &&
-                <section className="absolute left-7 w-full px-10 py-8 text-[16px] text-dark font-medium text-center bg-skyblue shadow-lg rounded-md border border-darkblue grid items-center justify-center gap-2 animate-rotate-in">
-                    <Link href="/create" className="hover:font-semibold hover-text-darkblue transition-all delay-150">Create</Link>
-                    <Link href="profile" className="hover:font-semibold hover-text-darkblue transition-all delay-150">Profile</Link>
+                <motion.section
+                    className="absolute min-w-[200px] px-4 py-8 text-[16px] text-dark font-medium text-center bg-skyblue shadow-lg rounded-md border border-darkblue grid items-center justify-center gap-2 animate-rotate-in"
+                    initial={{ opacity: 0, scale: 0.7 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                >
+                    <Link href="/create" className="hover:font-semibold hover-text-darkblue transition-all delay-150 flex items-center gap-2"><RiAiGenerate className="text-2xl"/> Create</Link>
+                    <Link href="profile" className="hover:font-semibold hover-text-darkblue transition-all delay-150 flex items-center gap-2"><FaRegUser className="text-2xl"/> Profile</Link>
                     <p
                         onClick={handleSignOut}
-                        className="hover:font-semibold hover-text-darkblue transition-all delay-150 cursor-pointer">Logout</p>
-                </section>
+                        className="hover:font-semibold hover-text-darkblue transition-all delay-150 cursor-pointer flex items-center gap-2"><TbLogout className="text-2xl"/>
+                        {isLoading ? (
+                                'Signing Out...'
+                            ) : (
+                                'Sign Out'
+                            )}</p>
+                </motion.section>
             }
         </main>
     );

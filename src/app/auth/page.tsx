@@ -43,7 +43,7 @@ const Auth = () => {
                 {isLogin ?
                     <Login onSwitch={() => setIsLogin(false)} />
                     :
-                    <SignUp onSwitch={() => setIsLogin(true)} />
+                    <SignUp onSwitch={() => setIsLogin(true)} setIsLogin={setIsLogin}/>
                 }
             </section>
         </main>

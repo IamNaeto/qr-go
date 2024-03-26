@@ -34,6 +34,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
         console.log(userCredential);
         toast.success("Login successful")
         setTimeout(() => {
+          setIsLoading(false);
           router.replace("/create");
         }, 3000);
       })
