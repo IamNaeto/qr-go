@@ -1,14 +1,25 @@
 import React, { FC, MouseEventHandler, useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { db } from '@/app/firebase/config';
 import { auth } from '@/app/firebase/config';
 import { TbLoader3 } from "react-icons/tb";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { motion } from 'framer-motion';
+import { FirebaseError } from 'firebase/app';
 
 interface SignUpProps {
   onSwitch: MouseEventHandler<HTMLSpanElement>;
-  setIsLogin: any
+  setIsLogin: any;
+}
+function isFirebaseError(error: unknown): error is FirebaseError {
+  return (error as FirebaseError).code !== undefined;
+}
+
+interface SignUpProps {
+  onSwitch: MouseEventHandler<HTMLSpanElement>;
+  setIsLogin: any;
 }
 
 const SignUp: FC<SignUpProps> = ({ onSwitch, setIsLogin }) => {
@@ -20,50 +31,81 @@ const SignUp: FC<SignUpProps> = ({ onSwitch, setIsLogin }) => {
   const [userName, setUserName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  // Define the type guard function (outside the component for reusability)
+  function isFirebaseError(error: unknown): error is FirebaseError {
+    return (error as FirebaseError).code !== undefined;
+  }
+
+  const generateQrgId = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let id = 'QRG-';
+    for (let i = 0; i < 7; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  };
+
   const handleSignUp = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    if (!firstName || !lastName ||!userName || !email || !password || !confirmPassword) {
-      toast.error("All fields are required.")
+    if (!firstName || !lastName || !userName || !email || !password || !confirmPassword) {
+      toast.error("All fields are required.");
       return;
     } else if (password !== confirmPassword) {
-      toast.error("Passwords not match")
+      toast.error("Passwords do not match.");
       return;
     }
 
-    // Simulate a loading process
     setIsLoading(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-        toast.success("Account created successfully")
-        setTimeout(() => {
-          setIsLogin(true)
-          setIsLoading(false);
-        }, 2000);
-      })
-      .catch((error) => {
-        console.log("Registration error:", error);
-        if (error.code === "auth/wrong-password") {
-          toast.error("Incorrect password");
-          setIsLoading(false);
-        } else if (error.code === "auth/invalid-email") {
-          toast.error("Invalid Email format");
-          setIsLoading(false);
-        } else if (error.code === "auth/weak-password") {
-          toast.error("Password should be at least 6 characters");
-          setIsLoading(false);
-        } else if (error.code === "auth/email-already-in-use") {
-          toast.error("Email already in use");
-          setIsLoading(false);
-        } else {
-          toast.error(error.code);
-          setIsLoading(false);
-          return;
-        }
-      });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const { uid } = userCredential.user; // Get the user ID
 
+      const qrgId = generateQrgId(); // Generate a unique QRG ID
+
+      // Save user data, QRG ID, and account type to Firestore
+      const userData = {
+        firstName,
+        lastName,
+        userName,
+        email,
+        qrgId,
+        accountType: "QRGo-Pro",
+      };
+
+      const userDocRef = doc(db, "users", uid); // Create a document reference with user ID
+      await setDoc(userDocRef, userData); // Set data on the document
+
+      console.log('User created and data saved:', userDocRef);
+      toast.success("Account created successfully!");
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsLogin(true)
+      }, 2000);
+    } catch (error) {
+      console.error("Registration error:", error);
+      setIsLoading(false);
+
+      // Handle specific error codes as needed for better user feedback
+      if (isFirebaseError(error)) {
+        if (error.code === 'auth/wrong-password') {
+          toast.error("Incorrect password.");
+        } else if (error.code === 'auth/invalid-email') {
+          toast.error("Invalid email format.");
+        } else if (error.code === 'auth/weak-password') {
+          toast.error("Password should be at least 6 characters.");
+        } else if (error.code === 'auth/email-already-in-use') {
+          toast.error("Email already in use.");
+        } else {
+          toast.error("An error occurred. Please try again.");
+        }
+      } else {
+        // Handle other types of errors (if applicable)
+        console.error("Unknown error:", error);
+        toast.error("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (

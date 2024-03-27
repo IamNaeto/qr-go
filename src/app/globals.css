@@ -37,6 +37,11 @@
   margin-top: 0.5rem;
 }
 
+.input:focus{
+  border: 2px solid #014F82;
+  transition: 1s;
+}
+
 .profile-input{
   padding: 0.4rem 0.5rem;
   border-radius: 0.5rem;
