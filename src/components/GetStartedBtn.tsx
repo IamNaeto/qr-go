@@ -14,7 +14,7 @@ const GetStartedBtn = () => {
         userLoggedIn = localStorage.getItem('user');
     }
 
-    if(!user && userLoggedIn != undefined)
+    if(!user && !userLoggedIn)
     
     return ( 
         <main>

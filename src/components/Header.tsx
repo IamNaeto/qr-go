@@ -57,8 +57,8 @@ const Header = () => {
                 <nav className={`${isMenuOpen ? 'flex' : 'hidden'} absolute top-[82px] md:top-auto left-0 md:left-auto md:relative w-full md:w-[70%] xl:w-[60%] md:flex flex-col md:flex-row items-start md:items-center justify-between bg-skyblue md:bg-none py-10 md:p-0`}>
                     <div className="text-dark text-[16px] font-semibold  flex flex-col md:flex-row items-start md:items-center justify-between gap-10 mb-10 md:mb-0 px-[5%]">
                         <Link href="/home" className={pathName === "/home" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Home</Link>
-                        <Link href="/about" className={pathName === "/about" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>AboutUs</Link>
-                        <Link href="contact" className={pathName === "/contact" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>ContactUs</Link>
+                        <Link href="/about" className={pathName === "/about" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>About</Link>
+                        <Link href="contact" className={pathName === "/contact" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Contact</Link>
                         {user && userLoggedIn != undefined &&
                             <div className="flex md:hidden flex-col gap-10">
                                 <Link href="contact" className={pathName === "/create" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Create</Link>
@@ -78,7 +78,9 @@ const Header = () => {
                             <UserInfo />
                         </div>
                         :
-                        <GetStartedBtn />
+                        <div className="pl-[5%]">
+                            <GetStartedBtn />
+                        </div>
                     }
 
                 </nav>

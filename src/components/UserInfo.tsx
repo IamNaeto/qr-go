@@ -32,7 +32,7 @@ const UserInfo = () => {
         setTimeout(() => {
             setIsLoading(false)
             signOut(auth)
-            // localStorage.removeItem('user')
+            localStorage.removeItem('user')
             router.replace("/home");
         }, 2000);
     }

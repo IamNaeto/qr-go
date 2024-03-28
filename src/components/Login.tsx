@@ -99,10 +99,10 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
             type="password" name="pword" id='pword' placeholder="Enter password" className="input" required />
         </label>
 
-        <label htmlFor="remember" className="text-[14px] flex items-center gap-2">
+        {/* <label htmlFor="remember" className="text-[14px] flex items-center gap-2">
           <input type="checkbox" name='remember' id='remember' required />
           Remember password
-        </label>
+        </label> */}
 
         <button
           onClick={handleLogin}
