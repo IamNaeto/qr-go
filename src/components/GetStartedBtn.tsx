@@ -6,7 +6,15 @@ import { auth } from "@/app/firebase/config";
 const GetStartedBtn = () => {
     const [user] = useAuthState(auth)
 
-    if(!user)
+    let userLoggedIn;
+
+    console.log(userLoggedIn)
+
+    if (typeof window !== 'undefined') {
+        userLoggedIn = localStorage.getItem('user');
+    }
+
+    if(!user && userLoggedIn != undefined)
     
     return ( 
         <main>

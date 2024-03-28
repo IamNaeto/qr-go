@@ -33,6 +33,7 @@ const Login: FC<LoginProps> = ({ onSwitch }) => {
       .then((userCredential) => {
         console.log(userCredential);
         toast.success("Login successful")
+        localStorage.setItem('user', "loggedIn");
         setTimeout(() => {
           setIsLoading(false);
           router.replace("/create");
