@@ -1,7 +1,19 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { auth } from "@/app/firebase/config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useContext } from "react";
+import { UserContext } from "./context/UserContext";
 
 const UserProfile = () => {
+    const { user } = useContext(UserContext);
+    
+    // Logic to get date of account creation
+    const [authUser] = useAuthState(auth);
+    let creationDate: null | any;
+    if (authUser && authUser.metadata) {
+        creationDate = authUser.metadata.creationTime;
+    }
     return (
         <main className="w-full h-full relative top-[90px] md:top-[95px] mb-10">
             <section className="bg-darkblue w-full h-[150px] mb-20 px-[5%] py-5">
@@ -43,9 +55,9 @@ const UserProfile = () => {
                         <div>
                             <h1 className="text-[18px] text-dark font-semi-bold font-semibold mb-3">Account Details</h1>
                             <div className="text-[16px] text-dark font-semibold flex items-center basis-60 flex-wrap gap-3 md:gap-8">
-                                <h1>User ID: <span className="font-normal ml-3">QRG-12345ABC</span></h1>
-                                <h1>Member Since: <span className="font-normal ml-3">Nov. 30, 2022</span></h1>
-                                <h1>Account Type: <span className="font-normal ml-3">QRGo-Pro</span></h1>
+                                <h1>User ID: <span className="font-normal ml-3">{user?.qrgId.toLocaleUpperCase()}</span></h1>
+                                <h1>Member Since: <span className="font-normal ml-3">{new Date(creationDate).toLocaleDateString()}</span></h1>
+                                <h1>Account Type: <span className="font-normal ml-3">{user?.accountType}</span></h1>
                             </div>
                         </div>
                     </div>
@@ -54,12 +66,12 @@ const UserProfile = () => {
 
             <section className="relative w-full h-full px-[5%] py-20 mt-[250px] md:mt-[50px]">
                 <form action="" className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-60 text-[14px] md:text-[16px] text-dark">
-                    <motion.div 
-                    className="grid gap-2"
-                    initial={{ opacity: 0, x: -40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
-                    viewport={{ once: true }}
+                    <motion.div
+                        className="grid gap-2"
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                        viewport={{ once: true }}
                     >
                         <h1 className="text-[20px] text-dark font-bold">Profile Details</h1>
                         <div className="flex items-center justify-between">
@@ -96,12 +108,12 @@ const UserProfile = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div 
-                    className="grid gap-2"
-                    initial={{ opacity: 0, x: 40 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
-                    viewport={{ once: true }}
+                    <motion.div
+                        className="grid gap-2"
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, ease: "easeInOut" }}
+                        viewport={{ once: true }}
                     >
                         <h1 className="text-[20px] text-dark font-bold">Social Media Links and Websites</h1>
                         <div className="flex items-center justify-between">

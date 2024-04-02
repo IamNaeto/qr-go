@@ -8,6 +8,8 @@ import { db } from '@/app/firebase/config';
     firstName: string;
     lastName: string;
     email: string;
+    qrgId: string;
+    accountType: string;
     // Other user data properties
   }
 

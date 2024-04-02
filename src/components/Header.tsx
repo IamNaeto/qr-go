@@ -19,7 +19,6 @@ const Header = () => {
     const [isLoading, setIsLoading] = useState(false)
     
     const { user } = useContext(UserContext);
-    // console.log({user})
 
     const [authUser] = useAuthState(auth)
 
