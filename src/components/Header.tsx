@@ -10,13 +10,18 @@ import UserInfo from "./UserInfo";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import { signOut } from "firebase/auth";
+import { UserContext } from "./context/UserContext";
+import React, { useContext } from 'react';
 
 const Header = () => {
     // Manage visibility of nav menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
+    
+    const { user } = useContext(UserContext);
+    // console.log({user})
 
-    const [user] = useAuthState(auth)
+    const [authUser] = useAuthState(auth)
 
     const pathName = usePathname()
 
@@ -59,7 +64,7 @@ const Header = () => {
                         <Link href="/home" className={pathName === "/home" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Home</Link>
                         <Link href="/about" className={pathName === "/about" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>About</Link>
                         <Link href="contact" className={pathName === "/contact" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Contact</Link>
-                        {user && userLoggedIn != undefined &&
+                        {authUser && userLoggedIn != undefined && 
                             <div className="flex md:hidden flex-col gap-10">
                                 <Link href="contact" className={pathName === "/create" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Create</Link>
                                 <Link href="contact" className={pathName === "/profile" ? " visited:text-darkblue transition-colors delay-200" : "hover:text-gray-600 transition-colors delay-200"}>Profile</Link>
@@ -73,9 +78,9 @@ const Header = () => {
                             </div>
                         }
                     </div>
-                    {user && userLoggedIn != undefined ?
+                    {authUser && userLoggedIn != undefined ?
                         <div className="hidden md:block">
-                            <UserInfo />
+                            <UserInfo user={ user }/>
                         </div>
                         :
                         <div className="pl-[5%]">

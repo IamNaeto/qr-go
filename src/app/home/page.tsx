@@ -5,18 +5,21 @@ import Header from "@/components/Header";
 import HomeHero from "@/components/HomeHero";
 import QRGuildlines from "@/components/QRGuildlines";
 import TryQR from "@/components/TryQR";
+import { UserProvider } from "@/components/context/UserContext";
 
 const Home = () => {
-    return ( 
+    return (
         <main>
-            <Header />
-            <HomeHero />
-            <QRGuildlines />
-            <TryQR />
-            <FAQ />
-            <Footer />
+            <UserProvider>
+                <Header />
+                <HomeHero />
+                <QRGuildlines />
+                <TryQR />
+                <FAQ />
+                <Footer />
+            </UserProvider>
         </main>
-     );
+    );
 }
- 
+
 export default Home;

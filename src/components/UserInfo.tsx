@@ -11,12 +11,15 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { motion } from "framer-motion";
 import { useRouter } from 'next/navigation';
 
-const UserInfo = () => {
+interface userInfoType {
+    user: any
+}
+const UserInfo: React.FC<userInfoType> = ({ user }) => {
+
+    console.log("user info", { user })
     // Manage visibility of nav menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
-
-    const [user] = useAuthState(auth);
 
     //Control nav hide and show
     const toggleMenu = () => {
@@ -43,8 +46,14 @@ const UserInfo = () => {
                 <div className="flex flex-col items-center justify-center text-center">
                     <div className="text-[16px] text-dark font-bold flex items-center justify-center gap-2">
                         <div className="flex items-center gap-2">
-                            <Image src="/img/user-active.png" width={40} height={40} alt="user" />
-                            <h1>Jane Doe</h1>
+                            {user?.img ? (
+                                <Image src={user?.img} width={40} height={40} alt="user" className="rounded-full" />
+                            ) : (
+                                <h1 className="text-2xl font-extrabold p-[4px] rounded-full border-4 border-darkblue text-orange">
+                                    {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                                </h1>
+                            )}
+                            <h1>{user?.userName}</h1>
                         </div>
                         {isMenuOpen ? <IoIosArrowUp className="text-2xl text-dark" /> : <IoIosArrowDown className="text-2xl text-dark" />}
                     </div>
@@ -55,7 +64,7 @@ const UserInfo = () => {
 
             {isMenuOpen &&
                 <motion.section
-                    className="absolute top-14 min-w-[200px] px-4 py-8 text-[16px] text-dark font-medium text-center bg-skyblue shadow-lg rounded-md border border-darkblue grid items-center justify-center gap-2 animate-rotate-in"
+                    className="absolute top-16 min-w-[200px] px-4 py-8 text-[16px] text-dark font-medium text-center bg-skyblue shadow-lg rounded-md border border-darkblue grid items-center justify-center gap-2 animate-rotate-in"
                     initial={{ opacity: 0, scale: 0.7 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
