@@ -56,6 +56,10 @@
   cursor: not-allowed;
 }
 
+.profile-input:read-write{
+  border: 2px solid #014F82;
+}
+
   /*Keyframes for the dangling animation */
   @keyframes dangle {
     0%, 100% {

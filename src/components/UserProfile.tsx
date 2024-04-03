@@ -111,8 +111,16 @@ const UserProfile = () => {
                         <h1 className="text-[24px] text-white font-semibold pt-3">Profile Information</h1>
 
                         <div className="absolute bottom-[-150px] left-[10px] flex flex-col items-center justify-center gap-4 z-10">
-                            <div className="p-2 rounded-full bg-white shadow-lg w-[150px]">
-                                <Image src="/img/user.png" width={100} height={100} alt="user" loading="lazy" className="w-full" />
+                            <div className="p-2 rounded-full bg-white shadow-lg w-[150px] text-center">
+                                {user?.img ? (
+                                    <Image src={user?.img} width={100} height={100} alt="user" loading="lazy" className="w-full rounded-full" />
+                                ) : (
+                                    <div className="text-7xl font-extrabold p-6 rounded-full border-8 border-darkblue text-darkblue text-center flex items-center justify-center">
+                                        <h1>
+                                            {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                                        </h1>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="flex items-center gap-4">
