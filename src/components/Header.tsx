@@ -26,8 +26,6 @@ const Header = () => {
 
     let userLoggedIn;
 
-    console.log(userLoggedIn)
-
     if (typeof window !== 'undefined') {
         userLoggedIn = localStorage.getItem('user');
     }

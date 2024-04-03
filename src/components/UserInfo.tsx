@@ -7,7 +7,6 @@ import { RiAiGenerate } from "react-icons/ri";
 import { TbLogout } from "react-icons/tb";
 import { auth } from "@/app/firebase/config";
 import { signOut } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { motion } from "framer-motion";
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +15,6 @@ interface userInfoType {
 }
 const UserInfo: React.FC<userInfoType> = ({ user }) => {
 
-    console.log("user info", { user })
     // Manage visibility of nav menu
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false)

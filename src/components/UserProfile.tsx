@@ -15,7 +15,6 @@ const UserProfile = () => {
     // Get the current user id
     const [currentUser] = useAuthState(auth);
 
-    console.log("Current user details ", {currentUser})
     // useEffect(() => {
     //     if (currentUser) {
     //         console.log("User UID:", currentUser.uid);
@@ -61,8 +60,7 @@ const UserProfile = () => {
             website: user?.website || '',
         });
     }, [user]);
-    
-    console.log(updatedUser)
+
 
     const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
@@ -98,7 +96,7 @@ const UserProfile = () => {
     if (currentUser && currentUser.metadata) {
         creationDate = currentUser.metadata.creationTime;
     }
-    
+
     return (
         <main className="w-full h-full relative top-[90px] md:top-[95px] mb-10">
             <section className="bg-darkblue w-full h-[150px] mb-20 px-[5%] py-5">
