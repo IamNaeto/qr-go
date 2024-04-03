@@ -47,6 +47,13 @@
   border-radius: 0.5rem;
   outline: none;
   border: none;
+  color: black;
+  background-color: #dde2e69d;
+  min-width: 70%;
+}
+
+.profile-input:read-only{
+  cursor: not-allowed;
 }
 
   /*Keyframes for the dangling animation */

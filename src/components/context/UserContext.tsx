@@ -2,20 +2,35 @@ import React, { createContext, useState, useEffect } from 'react';
 import { Auth, User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, DocumentSnapshot, getDoc } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
-  
+
 // Define your user data type from Firestore
-  interface UserDataType {
-    firstName: string;
-    lastName: string;
-    email: string;
-    qrgId: string;
-    accountType: string;
-    // Other user data properties
-  }
+interface UserDataType {
+  doc: any;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  qrgId: string;
+  accountType: string;
+  phoneNumber: string;
+  gender: string;
+  address: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  youtube: string;
+  linkedin: string;
+  website: string;
+
+  // Other user data properties
+}
 
 // Update the UserContextState interface to match your user data type
 export interface UserContextState {
-  user: UserDataType | null;
+  user: UserDataType | null | any;
 }
 
 

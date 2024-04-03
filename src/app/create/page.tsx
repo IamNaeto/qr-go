@@ -6,17 +6,17 @@ import PrivateRoute from "@/components/PrivateRoute";
 import { UserProvider } from "@/components/context/UserContext";
 
 const Create = () => {
-    return ( 
+    return (
         <main>
             <PrivateRoute>
                 <UserProvider>
-                <Header />
-                <CreateQR />
-                <Footer />
+                    <Header />
+                    <CreateQR />
+                    <Footer />
                 </UserProvider>
             </PrivateRoute>
         </main>
-     );
+    );
 }
- 
+
 export default Create;
