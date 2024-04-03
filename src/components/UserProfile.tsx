@@ -12,9 +12,9 @@ import { doc, updateDoc } from "firebase/firestore";
 const UserProfile = () => {
     const [editing, setEditing] = useState(false);
     const { user } = useContext(UserContext);
+    const [email, setEmail] = useState(user?.email)
     // Get the current user id
     const [currentUser] = useAuthState(auth);
-
     // useEffect(() => {
     //     if (currentUser) {
     //         console.log("User UID:", currentUser.uid);
@@ -24,7 +24,6 @@ const UserProfile = () => {
     const [updatedUser, setUpdatedUser] = useState({
         firstName: user?.firstName || '',
         lastName: user?.lastName || '',
-        email: user?.email || '',
         userName: user?.userName || '',
         phoneNumber: user?.phoneNumber || '',
         gender: user?.gender || '',
@@ -44,7 +43,6 @@ const UserProfile = () => {
         setUpdatedUser({
             firstName: user?.firstName || '',
             lastName: user?.lastName || '',
-            email: user?.email || '',
             userName: user?.userName || '',
             phoneNumber: user?.phoneNumber || '',
             gender: user?.gender || '',
@@ -184,10 +182,9 @@ const UserProfile = () => {
                             <input
                                 type="email"
                                 name="email"
-                                value={updatedUser.email}
-                                onChange={handleInputChange}
+                                value={email}
                                 className="profile-input"
-                                readOnly={!editing}
+                                readOnly
                             />
                         </div>
                         <div className="flex items-center justify-between">
