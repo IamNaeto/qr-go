@@ -45,7 +45,7 @@ const UserInfo: React.FC<userInfoType> = ({ user }) => {
                     <div className="text-[16px] text-dark font-bold flex items-center justify-center gap-2">
                         <div className="flex items-center gap-2">
                             {user?.img ? (
-                                <Image src={user?.img} width={40} height={40} alt="user" className="rounded-full" />
+                                <Image src={user?.img} width={40} height={40} alt="user" className="w-[45px] h-[45px] rounded-full" />
                             ) : (
                                 <h1 className="text-2xl font-extrabold p-[4px] rounded-full border-4 border-darkblue text-orange">
                                     {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}

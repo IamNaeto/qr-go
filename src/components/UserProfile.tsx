@@ -2,17 +2,19 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { auth } from "@/app/firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "./context/UserContext";
-import { db } from "@/app/firebase/config";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { doc, updateDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '@/app/firebase/config';
 
 const UserProfile = () => {
     const [editing, setEditing] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
     const { user } = useContext(UserContext);
-    const [email, setEmail] = useState(user?.email)
+    const [profilePicture, setProfilePicture] = useState<File | null>(null);
     // Get the current user id
     const [currentUser] = useAuthState(auth);
     // useEffect(() => {
@@ -24,6 +26,7 @@ const UserProfile = () => {
     const [updatedUser, setUpdatedUser] = useState({
         firstName: user?.firstName || '',
         lastName: user?.lastName || '',
+        email: user?.email || '',
         userName: user?.userName || '',
         phoneNumber: user?.phoneNumber || '',
         gender: user?.gender || '',
@@ -43,6 +46,7 @@ const UserProfile = () => {
         setUpdatedUser({
             firstName: user?.firstName || '',
             lastName: user?.lastName || '',
+            email: user?.email || '',
             userName: user?.userName || '',
             phoneNumber: user?.phoneNumber || '',
             gender: user?.gender || '',
@@ -95,6 +99,52 @@ const UserProfile = () => {
         creationDate = currentUser.metadata.creationTime;
     }
 
+    // Logic to choose and update profile picture
+    const choosePicture = () => {
+        const inputElement = document.createElement('input');
+        inputElement.type = 'file';
+        inputElement.accept = 'image/*';
+        inputElement.onchange = (e) => {
+            const target = e.target as HTMLInputElement;
+            if (target.files && target.files.length > 0) {
+                setProfilePicture(target.files[0]);
+            }
+        };
+        inputElement.click();
+    };
+
+    const storage = getStorage(); // Initializing Firebase Storage
+
+    const handleUpdateProfilePicture = async () => {
+        if (profilePicture && currentUser) {
+            try {
+                // Upload profile picture to Firebase Storage
+                setIsLoading(true)
+                const storageRef = ref(storage, `profilePictures/${currentUser.uid}`);
+                const snapshot = await uploadBytes(storageRef, profilePicture);
+                const downloadURL = await getDownloadURL(snapshot.ref);
+
+                // Update profile picture URL in Firestore
+                const userDocRef = doc(db, `users/${currentUser.uid}`);
+                await updateDoc(userDocRef, { img: downloadURL });
+
+                toast.success("Profile picture updated successfully.");
+                setIsLoading(false)
+                setProfilePicture(null)
+            } catch (error) {
+                console.error("Error updating profile picture:", error);
+                toast.error("Failed to update profile picture. Please check console for error.");
+            }
+        } else {
+            toast.error("Please select a profile picture to update.");
+        }
+    };
+
+
+    const handleView = () => {
+        console.log("Picture Enlarged")
+    }
+
     return (
         <main className="w-full h-full relative top-[90px] md:top-[95px] mb-10">
             <section className="bg-darkblue w-full h-[150px] mb-20 px-[5%] py-5">
@@ -108,10 +158,10 @@ const UserProfile = () => {
                     <div className="grid gap-2">
                         <h1 className="text-[24px] text-white font-semibold pt-3">Profile Information</h1>
 
-                        <div className="absolute bottom-[-150px] left-[10px] flex flex-col items-center justify-center gap-4 z-10">
-                            <div className="p-2 rounded-full bg-white shadow-lg w-[150px] text-center">
+                        <div className="absolute bottom-[-150px] left-0 flex flex-col items-center justify-center gap-4 z-10">
+                            <div className="p-2 rounded-full bg-white shadow-lg w-[150px] h-[150px] text-center">
                                 {user?.img ? (
-                                    <Image src={user?.img} width={100} height={100} alt="user" loading="lazy" className="w-full rounded-full" />
+                                    <Image src={user?.img} width={100} height={100} alt="user" loading="lazy" className="w-full h-full rounded-full" />
                                 ) : (
                                     <div className="text-7xl font-extrabold p-6 rounded-full border-8 border-darkblue text-darkblue text-center flex items-center justify-center">
                                         <h1>
@@ -122,8 +172,33 @@ const UserProfile = () => {
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <button className="text[14px] md:text-[16px] px-4 py-1 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer">View</button>
-                                <button className="text[14px] md:text-[16px] px-4 py-1 bg-white text-blue border border-blue font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer">Edit</button>
+                                <button
+                                    className="text[14px] md:text-[16px] px-4 py-2 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer"
+                                    onClick={handleView}
+                                >
+                                    View Picture
+                                </button>
+                                {profilePicture ? (
+                                    <button
+                                        className="text[14px] md:text-[16px] px-4 py-2 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer"
+                                        onClick={handleUpdateProfilePicture}
+                                    >
+                                        {isLoading ? (
+                                            "Uploading..."
+                                        ) : (
+                                            "Upload Picture"
+                                        )}
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="text[14px] md:text-[16px] px-4 py-2 bg-white text-blue border border-blue font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer"
+                                        onClick={() => {
+                                            choosePicture();
+                                        }}
+                                    >
+                                        Choose Picture
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -182,7 +257,7 @@ const UserProfile = () => {
                             <input
                                 type="email"
                                 name="email"
-                                value={email}
+                                value={updatedUser.email}
                                 className="profile-input"
                                 readOnly
                             />
