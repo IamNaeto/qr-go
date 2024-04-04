@@ -17,11 +17,6 @@ const UserProfile = () => {
     const [profilePicture, setProfilePicture] = useState<File | null>(null);
     // Get the current user id
     const [currentUser] = useAuthState(auth);
-    // useEffect(() => {
-    //     if (currentUser) {
-    //         console.log("User UID:", currentUser.uid);
-    //     }
-    // }, [currentUser]);
 
     const [updatedUser, setUpdatedUser] = useState({
         firstName: user?.firstName || '',
