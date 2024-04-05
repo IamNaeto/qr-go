@@ -9,12 +9,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
+import Modal from 'react-modal';
+import { FaRegWindowClose } from "react-icons/fa";
 
 const UserProfile = () => {
     const [editing, setEditing] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const { user } = useContext(UserContext);
     const [profilePicture, setProfilePicture] = useState<File | null>(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     // Get the current user id
     const [currentUser] = useAuthState(auth);
 
@@ -136,9 +140,14 @@ const UserProfile = () => {
     };
 
 
-    const handleView = () => {
-        console.log("Picture Enlarged")
-    }
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
 
     return (
         <main className="w-full h-full relative top-[90px] md:top-[95px] mb-10">
@@ -169,7 +178,7 @@ const UserProfile = () => {
                             <div className="flex items-center gap-4">
                                 <button
                                     className="text[14px] md:text-[16px] px-4 py-2 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer"
-                                    onClick={handleView}
+                                    onClick={openModal}
                                 >
                                     View Picture
                                 </button>
@@ -196,6 +205,28 @@ const UserProfile = () => {
                                 )}
                             </div>
                         </div>
+
+                        <Modal
+                            isOpen={modalIsOpen}
+                            onRequestClose={closeModal}
+                            className="fixed inset-0 flex items-center justify-center z-50"
+                            overlayClassName="fixed inset-0 backdrop-blur-3xl z-50"
+                        >
+                            <div className="relative p-2 rounded-full bg-white shadow-lg w-[400px] h-[400px] text-center">
+                                {user?.img ? (
+                                    <Image src={user?.img} width={500} height={500} alt="user" loading="lazy" className="w-full h-full rounded-full" />
+                                ) : (
+                                    <div className="w-full h-full text-9xl font-extrabold p-6 rounded-full border-8 border-darkblue text-darkblue text-center flex items-center justify-center">
+                                            {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                                    </div>
+                                )}
+
+                                <FaRegWindowClose 
+                                className="absolute top-0 right-[-10px] text-darkblue text-3xl cursor-pointer"
+                                onClick={closeModal}
+                                />
+                            </div>
+                        </Modal>
                     </div>
 
                     <div>
