@@ -200,7 +200,7 @@ const UserProfile = () => {
                                             choosePicture();
                                         }}
                                     >
-                                        Choose Picture
+                                        Change Picture
                                     </button>
                                 )}
                             </div>
@@ -212,20 +212,28 @@ const UserProfile = () => {
                             className="fixed inset-0 flex items-center justify-center z-50"
                             overlayClassName="fixed inset-0 backdrop-blur-3xl z-50"
                         >
-                            <div className="relative p-2 rounded-full bg-white shadow-lg w-[400px] h-[400px] text-center">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.7 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 1, ease: "easeInOut" }}
+                                viewport={{ once: true }}
+                                className="relative p-2 bg-white shadow-lg w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] text-center"
+                            >
                                 {user?.img ? (
-                                    <Image src={user?.img} width={500} height={500} alt="user" loading="lazy" className="w-full h-full rounded-full" />
+                                    <Image src={user?.img} width={500} height={500} alt="user" loading="lazy" className="w-full h-full" />
                                 ) : (
-                                    <div className="w-full h-full text-9xl font-extrabold p-6 rounded-full border-8 border-darkblue text-darkblue text-center flex items-center justify-center">
-                                            {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
+                                    <div className="w-full h-full text-9xl font-extrabold p-6 border-8 border-darkblue text-darkblue text-center flex items-center justify-center">
+                                        {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
                                     </div>
                                 )}
 
-                                <FaRegWindowClose 
-                                className="absolute top-0 right-[-10px] text-darkblue text-3xl cursor-pointer"
-                                onClick={closeModal}
-                                />
-                            </div>
+                                <button
+                                    className="text[14px] md:text-[16px] px-8 py-2 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer mt-5"
+                                    onClick={closeModal}
+                                >
+                                    Close
+                                </button>
+                            </motion.div>
                         </Modal>
                     </div>
 
