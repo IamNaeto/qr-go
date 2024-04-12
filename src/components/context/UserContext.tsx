@@ -3,9 +3,11 @@ import { Auth, User, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, DocumentData, DocumentSnapshot, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
 import { TbLoader3 } from 'react-icons/tb';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 // Define your user data type from Firestore
 interface UserDataType {
+  img: string | StaticImport;
   doc: any;
   firstName: string;
   lastName: string;
@@ -25,8 +27,6 @@ interface UserDataType {
   youtube: string;
   linkedin: string;
   website: string;
-
-  // Other user data properties
 }
 
 // Update the UserContextState interface to match your user data type
@@ -57,7 +57,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setIsLoading(true); // Set loading to true when starting data fetch
         await fetchUser(currentUser.uid);
         setIsLoading(false); // Set loading to false after data fetch
-        // Add listener for changes in Firestore user document
+
+        // Listener for changes in Firestore user document
         const userDocRef = doc(db, 'users', currentUser.uid);
         const unsubscribeSnapshot = onSnapshot(userDocRef, (doc: DocumentSnapshot<DocumentData>) => {
           if (doc.exists()) {

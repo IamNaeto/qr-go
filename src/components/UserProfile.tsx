@@ -10,6 +10,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
 import Modal from 'react-modal';
+import { MdUpload } from "react-icons/md";
 
 const UserProfile = () => {
     const [editing, setEditing] = useState(false);
@@ -183,9 +184,10 @@ const UserProfile = () => {
                                 </button>
                                 {profilePicture ? (
                                     <button
-                                        className="text[14px] md:text-[16px] px-4 py-2 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer"
+                                        className="text[14px] md:text-[16px] p-2 bg-blue text-white font-semibold rounded-md hover:shadow-lg transition-all delay-150 cursor-pointer flex items-center justify-center gap-1"
                                         onClick={handleUpdateProfilePicture}
                                     >
+                                        <MdUpload className="text-2xl animate-bounce"/>
                                         {isLoading ? (
                                             "Uploading..."
                                         ) : (
