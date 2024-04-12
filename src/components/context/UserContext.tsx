@@ -3,11 +3,10 @@ import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, DocumentData, DocumentSnapshot, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
 import { TbLoader3 } from 'react-icons/tb';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 // Definng user data type from Firestore
 interface UserDataType {
-  img: string | StaticImport;
+  img: string;
   doc: any;
   firstName: string;
   lastName: string;
