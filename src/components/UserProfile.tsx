@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { auth } from "@/app/firebase/config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +19,7 @@ const UserProfile = () => {
     const [profilePicture, setProfilePicture] = useState<File | null>(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    // Get the current user id
+    // Getting the current user id
     const [currentUser] = useAuthState(auth);
 
     const [updatedUser, setUpdatedUser] = useState({

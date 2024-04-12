@@ -1,11 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { Auth, User, getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, DocumentData, DocumentSnapshot, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/app/firebase/config';
 import { TbLoader3 } from 'react-icons/tb';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
-// Define your user data type from Firestore
+// Definng user data type from Firestore
 interface UserDataType {
   img: string | StaticImport;
   doc: any;
@@ -29,7 +29,7 @@ interface UserDataType {
   website: string;
 }
 
-// Update the UserContextState interface to match your user data type
+// Updatng the UserContextState interface to match user data type
 interface UserContextState {
   user: UserDataType | null;
   isLoading: boolean;
