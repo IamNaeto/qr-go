@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Link from "next/link";
 import { FaBackward } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { useRouter } from 'next/navigation';
 
 const FileQR = () => {
   const [qrCode, setQrCode] = useState<string | null>(null);
@@ -18,13 +19,15 @@ const FileQR = () => {
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   const [uniqueIdentifier, setUniqueIdentifier] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const router = useRouter(); // Initialize useRouter
 
   const generateUniqueIdentifier = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: { "image/*": [".jpg", ".jpeg", ".png", ".gif"] },
+    accept: { "image/*": [".jpg", ".jpeg", ".png", ".gif", ".pdf", ".doc", ".docx", ".ppt", ".pptx"] },
     onDrop: async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       if (acceptedFiles && acceptedFiles.length > 0) {
         const file = acceptedFiles[0];
@@ -61,7 +64,8 @@ const FileQR = () => {
   const generateQRCode = async () => {
     if (uploadedFileName && uniqueIdentifier) {
       try {
-        const qrCodeData = `YourBaseURL/${uniqueIdentifier}`;
+        const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL || window.location.origin; // Get the base URL
+        const qrCodeData = `${baseURL}/${uniqueIdentifier}`;
         const generatedQRCode = await QRCode.toDataURL(qrCodeData);
         toast.success("QR-Code generated successfully!")
         setQrCode(generatedQRCode);
@@ -71,6 +75,7 @@ const FileQR = () => {
       }
     }
   };
+  
 
   const downloadAsJPG = () => {
     if (qrCode) {
