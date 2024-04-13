@@ -94,7 +94,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       {isLoading ? ( // Render loading spinner if isLoading is true
         <div className="w-full h-screen flex items-center justify-center bg-white text-center">
           <TbLoader3
-            className="animate-spin text-orange text-7xl font-semibold text-center"
+            className="animate-spin text-blue text-7xl font-semibold text-center"
           />
         </div>
       ) : (
