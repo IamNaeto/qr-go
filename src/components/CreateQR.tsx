@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 
 const CreateQR = () => {
     return (
-        <main className="relative top-[100px] w-full pt-5 pb-20 px-[5%] grid gap-10">
-            <section className="grid gap-8">
+        <main className="relative top-[100px] w-full min-h-screen pt-5 pb-20 px-[5%] grid gap-10">
+            <section className="flex flex-col items-center justify-center gap-8">
                 <motion.h1
                     className="text-[28px] md:text-[34px] text-dark text-center font-semibold"
                     initial={{ opacity: 0, y: -40 }}
@@ -22,18 +22,28 @@ const CreateQR = () => {
                     transition={{ duration: 1, ease: "easeInOut" }}
                     viewport={{ once: true }}
                 >
-                    <Link href="/link" className="px-10 py-5 rounded-lg border-2 border-blue text-dark text-[18px] font-semibold flex flex-col items-center justify-center gap-4 hover:bg-liteskyblue transition-all delay-150">
-                        <FaLink className="text-4xl text-blue" />
-                        Link
-                    </Link>
-                    <Link href="/file" className="px-10 py-5 rounded-lg border-2 border-blue text-dark text-[18px] font-semibold flex flex-col items-center justify-center gap-4 hover:bg-liteskyblue transition-all delay-150">
-                        <FaFile className="text-4xl text-blue" />
-                        File
-                    </Link>
+                    <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    >
+                        <Link href="/link" className="px-10 py-5 rounded-lg border-2 border-blue text-dark text-[18px] font-semibold flex flex-col items-center justify-center gap-4 hover:bg-liteskyblue transition-all delay-150">
+                            <FaLink className="text-4xl text-blue" />
+                            Link
+                        </Link>
+                    </motion.div>
+                    <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    >
+                        <Link href="/file" className="px-10 py-5 rounded-lg border-2 border-blue text-dark text-[18px] font-semibold flex flex-col items-center justify-center gap-4 hover:bg-liteskyblue transition-all delay-150">
+                            <FaFile className="text-4xl text-blue" />
+                            File
+                        </Link>
+                    </motion.div>
                 </motion.div>
             </section>
 
-            <motion.section
+            {/* <motion.section
                 className="grid gap-4 w-full"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +87,7 @@ const CreateQR = () => {
                 <div>
 
                 </div>
-            </motion.section>
+            </motion.section> */}
 
         </main>
     );
