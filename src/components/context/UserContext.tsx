@@ -4,7 +4,7 @@ import { doc, DocumentData, DocumentSnapshot, getDoc, onSnapshot } from 'firebas
 import { db } from '@/app/firebase/config';
 import { TbLoader3 } from 'react-icons/tb';
 
-// Definng user data type from Firestore
+// Defining user data type from Firestore
 interface UserDataType {
   img: string;
   doc: any;
@@ -28,13 +28,11 @@ interface UserDataType {
   website: string;
 }
 
-// Updatng the UserContextState interface to match user data type
+// Updating the UserContextState interface to match user data type
 interface UserContextState {
   user: UserDataType | null;
   isLoading: boolean;
 }
-
-
 
 export const UserContext = createContext<UserContextState>({
   user: null,
@@ -48,59 +46,67 @@ interface UserProviderProps {
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserDataType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null); // Add error state
+  const [unsubscribeSnapshot, setUnsubscribeSnapshot] = useState<() => void>(() => {});
 
   useEffect(() => {
     const auth: Auth = getAuth();
     const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setIsLoading(true); // Set loading to true when starting data fetch
-        await fetchUser(currentUser.uid);
+        try {
+          await fetchUser(currentUser.uid);
+        } catch (error) {
+          setError('Error fetching user data');
+        }
         setIsLoading(false); // Set loading to false after data fetch
 
         // Listener for changes in Firestore user document
         const userDocRef = doc(db, 'users', currentUser.uid);
-        const unsubscribeSnapshot = onSnapshot(userDocRef, (doc: DocumentSnapshot<DocumentData>) => {
+        const unsubscribe = onSnapshot(userDocRef, (doc: DocumentSnapshot<DocumentData>) => {
           if (doc.exists()) {
             const updatedUserData = doc.data() as UserDataType;
             setUser(updatedUserData);
           }
         });
-        return () => unsubscribeSnapshot();
+        setUnsubscribeSnapshot(() => unsubscribe); // Save unsubscribe function
       } else {
         setUser(null);
       }
     });
 
-    return () => unsubscribeAuth();
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeSnapshot) {
+        unsubscribeSnapshot(); // Call the unsubscribe function when component unmounts
+      }
+    };
   }, []);
 
   const fetchUser = async (userId: string) => {
     const userDocRef = doc(db, 'users', userId);
-    try {
-      const docSnap: DocumentSnapshot<DocumentData> = await getDoc(userDocRef);
-      if (docSnap.exists()) {
-        const userData = docSnap.data() as UserDataType;
-        setUser(userData);
-      } else {
-        console.error('User document not found');
-      }
-    } catch (error) {
-      console.error('Error fetching user:', error);
+    const docSnap: DocumentSnapshot<DocumentData> = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      const userData = docSnap.data() as UserDataType;
+      setUser(userData);
+    } else {
+      throw new Error('User document not found');
     }
   };
 
-  return (
-    <UserContext.Provider value={{ user, isLoading }}>
-      {isLoading ? ( // Render loading spinner if isLoading is true
-        <div className="w-full h-screen flex items-center justify-center bg-white text-center">
-          <TbLoader3
-            className="animate-spin text-blue text-7xl font-semibold text-center"
-          />
-        </div>
-      ) : (
-        // Render children if isLoading is false (data has been fetched)
-        children
-      )}
-    </UserContext.Provider>
-  );
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center bg-white text-center">
+        <TbLoader3
+          className="animate-spin text-blue text-7xl font-semibold text-center"
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>; // Render error message
+  }
+
+  return <UserContext.Provider value={{ user, isLoading }}>{children}</UserContext.Provider>;
 };
