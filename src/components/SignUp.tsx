@@ -118,7 +118,7 @@ const SignUp: FC<SignUpProps> = ({ onSwitch, setIsLogin }) => {
         transition={{ duration: 1, ease: "easeInOut" }}
         viewport={{ once: true }}
       >
-        <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Generate a <span className="text-blue">QR code</span></h1>
+        <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark text-center font-semibold">Generate A <span className="text-blue">QR Code</span></h1>
         <p className="text-[14px] md:text-[16px] text-dark text-center">Get started and generate a Qr code on the go</p>
       </motion.div>
 
