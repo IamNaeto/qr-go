@@ -14,7 +14,7 @@ const HomeHero = () => {
                     transition={{ duration: 1, ease: "easeInOut" }}
                     viewport={{ once: true }}
                 >
-                    <h1 className="w-full lg:w-[80%] text-3xl md:text-4xl lg:text-5xl text-dark font-semibold text-center md:text-left tracking-wide leading-9"><span className="text-blue mt-20">QR Code</span> Generator That Makes All The <span className="text-blue"> Difference.</span></h1>
+                    <h1 className="w-full lg:w-[80%] text-3xl md:text-4xl lg:text-5xl text-dark font-semibold text-center md:text-left tracking-wide leading-10"><span className="text-blue mt-20">QR Code</span> Generator That Makes All The <span className="text-blue"> Difference.</span></h1>
 
                     <p className="w-full lg:w-[60%] text-[15px] md:text-[18px] text-dark font-medium text-center md:text-left">Monitor, share, download
                         and generate your Qr Codes all in

@@ -16,7 +16,7 @@ const LandingHero = () => {
                         transition={{ duration: 1, ease: "easeInOut" }}
                         viewport={{ once: true }}
                     >
-                        <h1 className="w-full lg:w-[90%] text-3xl md:text-4xl lg:text-5xl lg:text-[40px] xl:text-[42px] text-dark font-bold text-center md:text-left leading-9 tracking-wide"><span className="text-blue">Create A QR Code</span> To Both Safeguard Your Data
+                        <h1 className="w-full lg:w-[90%] text-3xl md:text-4xl lg:text-5xl lg:text-[40px] xl:text-[42px] text-dark font-bold text-center md:text-left leading-10 tracking-wide"><span className="text-blue">Create A QR Code</span> To Both Safeguard Your Data
                             And <span className="text-blue">Advertise</span> Your <span>Business</span> Or
                             <span className="text-blue"> Idea.</span></h1>
 
