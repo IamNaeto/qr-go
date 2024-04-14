@@ -16,10 +16,9 @@ const LandingHero = () => {
                         transition={{ duration: 1, ease: "easeInOut" }}
                         viewport={{ once: true }}
                     >
-                        <h1 className="w-full lg:w-[90%] text-[28px] md:text-[36px] lg:text-[40px] xl:text-[42px] text-dark font-bold text-center md:text-left"><span className="text-blue">Create a QR code</span> to
-                            both Safeguard your data
-                            and <span className="text-blue">advertise</span> your <span>business</span> or
-                            <span className="text-blue"> idea.</span></h1>
+                        <h1 className="w-full lg:w-[90%] text-3xl md:text-4xl lg:text-5xl lg:text-[40px] xl:text-[42px] text-dark font-bold text-center md:text-left leading-9 tracking-wide"><span className="text-blue">Create A QR Code</span> To Both Safeguard Your Data
+                            And <span className="text-blue">Advertise</span> Your <span>Business</span> Or
+                            <span className="text-blue"> Idea.</span></h1>
 
                         <p className="w-full lg:w-[80%] text-[14px] md:text-[16px] lg:text-[18px] text-dark font-medium text-center md:text-left">Our platform allows you to effortlessly generate QR codes,
                             keep track of them, and analyze their performance

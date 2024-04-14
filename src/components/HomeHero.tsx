@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const HomeHero = () => {
     return (
-        <main className="w-full min-h-screen grid items-center justify-center px-[5%] relative top-[50px] sm:top-[70px] md:top-[50px] py-5">
+        <main className="w-full min-h-screen grid items-center justify-center px-[5%] relative top-[70px] md:top-[50px] py-5">
             <section className="w-full grid grid-cols-1 md:grid-cols-2 items-center justify-center place-items-center">
                 <motion.section
                     className="grid gap-4"
@@ -14,7 +14,7 @@ const HomeHero = () => {
                     transition={{ duration: 1, ease: "easeInOut" }}
                     viewport={{ once: true }}
                 >
-                    <h1 className="w-full lg:w-[80%] text-[35px] md:text-[38px] lg:text-[42px] text-dark font-semibold text-center md:text-left"><span className="text-blue">QR code</span> generator that makes all the <span className="text-blue"> difference.</span></h1>
+                    <h1 className="w-full lg:w-[80%] text-3xl md:text-4xl lg:text-5xl text-dark font-semibold text-center md:text-left tracking-wide leading-9"><span className="text-blue mt-20">QR Code</span> Generator That Makes All The <span className="text-blue"> Difference.</span></h1>
 
                     <p className="w-full lg:w-[60%] text-[15px] md:text-[18px] text-dark font-medium text-center md:text-left">Monitor, share, download
                         and generate your Qr Codes all in

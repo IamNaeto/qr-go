@@ -13,7 +13,7 @@ const FAQ = () => {
                     transition={{ duration: 1, ease: "easeInOut" }}
                     viewport={{ once: true }}
                 >
-                    <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-center font-semibold text-dark">Frequently Asked Questions</h1>
+                    <h1 className="text-[28px] md:text-4xl lg:text-5xl text-center font-semibold text-dark">Frequently Asked Questions</h1>
                 </motion.div>
             </section>
 
@@ -36,7 +36,7 @@ const FAQ = () => {
                         transition={{ duration: 1, ease: "easeInOut" }}
                         viewport={{ once: true }}
                     >
-                        <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center md:text-left">What is QR Code?</h1>
+                        <h1 className="text-[28px] md:text-4xl lg:text-5xl text-dark font-semibold text-center md:text-left">What is QR Code?</h1>
 
                         <p className="text-[14px] md:text-[16px] text-dark font-medium text-center md:text-left">A  QR code (Quick Response Code) is a type of barcode
                             that stores information and can be read by a digital device,
@@ -52,7 +52,7 @@ const FAQ = () => {
                         transition={{ duration: 1, ease: "easeInOut" }}
                         viewport={{ once: true }}
                     >
-                        <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center md:text-right">Who uses QR Code?</h1>
+                        <h1 className="text-[28px] md:text-4xl lg:text-5xl text-dark font-semibold text-center md:text-right">Who uses QR Code?</h1>
 
                         <p className="text-[14px] md:text-[16px] text-dark font-medium text-center md:text-right">QR Codes are used by virtually everyone.
                             It has documents, links to pages and websites attached to it,
@@ -89,7 +89,7 @@ const FAQ = () => {
                         transition={{ duration: 1, ease: "easeInOut" }}
                         viewport={{ once: true }}
                     >
-                        <h1 className="text-[28px] md:text-[36px] lg:text-[40px] text-center md:text-left text-dark font-semibold">What kind of information
+                        <h1 className="text-[28px] md:text-4xl lg:text-5xl text-center md:text-left text-dark font-semibold">What kind of information
                             can I store on a QR Code?</h1>
 
                         <p className="text-[14px] md:text-[16px] text-center md:text-left text-dark font-medium">QR Codes are so versatile, they are able to

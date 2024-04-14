@@ -4,12 +4,12 @@ const QRGuildlines = () => {
     return (
         <main className="relative top-[100px] bg-skyblue w-full px-[5%] pt-28 pb-20 grid gap-4 bg-background" id="guildlines">
             <motion.h1
-                className="text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center"
+                className="text-3xl md:text-4xl lg:text-5xl text-dark font-semibold text-center"
                 initial={{ opacity: 0, y: -40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeInOut" }}
                 viewport={{ once: true }}
-            >Create your Qr Code in matter of minutes.</motion.h1>
+            >Create Your Qr Code In Matter Of Minutes.</motion.h1>
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
                 <motion.div

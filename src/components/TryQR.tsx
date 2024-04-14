@@ -13,7 +13,7 @@ const TryQR = () => {
                     transition={{ duration: 1, ease: "easeInOut" }}
                     viewport={{ once: true }}
                 >
-                    <h1 className="w-full lg:w-[80%] text-[28px] md:text-[36px] lg:text-[40px] text-dark font-semibold text-center md:text-left">Try QR Go Today!</h1>
+                    <h1 className="w-full lg:w-[80%] text-3xl md:text-4xl lg:text-5xl text-dark font-semibold text-center md:text-left">Try QR Go Today!</h1>
 
                     <p className="w-full lg:w-[70%] text-[14px] md:text-[16px] text-dark font-medium text-center md:text-left">Get started for free. Generate codes
                         for anything you want. Have all digital information
