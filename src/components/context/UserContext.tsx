@@ -72,6 +72,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setUnsubscribeSnapshot(() => unsubscribe); // Save unsubscribe function
       } else {
         setUser(null);
+        setIsLoading(false); // Set loading to false when user is not logged in
       }
     });
 
@@ -94,7 +95,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading && user !== null) {
     return (
       <div className="w-full h-screen flex items-center justify-center bg-white text-center">
         <TbLoader3
