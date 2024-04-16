@@ -1,6 +1,6 @@
 import { FaFile, FaLink } from "react-icons/fa6";
-import { IoLinkSharp } from "react-icons/io5";
-import { IoMdAttach } from "react-icons/io";
+// import { IoLinkSharp } from "react-icons/io5";
+// import { IoMdAttach } from "react-icons/io";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -14,9 +14,9 @@ const CreateQR = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
                     viewport={{ once: true }}
-                >Create QR for</motion.h1>
+                >Create QR-Code for</motion.h1>
                 <motion.div
-                    className="flex items-center justify-center gap-10 md:gap-24"
+                    className="flex items-center justify-center gap-8 md:gap-16"
                     initial={{ opacity: 0, scale: 0.7 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
@@ -31,6 +31,17 @@ const CreateQR = () => {
                             Link
                         </Link>
                     </motion.div>
+
+                    <motion.p 
+                    className="text-3xl font-bold text-dark"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    viewport={{ once: true }}
+                    >
+                        or
+                    </motion.p>
+
                     <motion.div
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
